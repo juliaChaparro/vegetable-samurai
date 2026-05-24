@@ -1,0 +1,138 @@
+:root {
+  --asset-vida: url('../assets/Moeda_vida.svg');
+  --asset-bomba: url('../assets/nuclear_bomb_enemy.svg');
+  
+  --abobora-inteira: url('../assets/Vegetais_SVG/abobora_Inteira.svg');
+  --abobora-esq: url('../assets/Vegetais_SVG/abobora_Esquerda.svg');
+  --abobora-dir: url('../assets/Vegetais_SVG/abobora_Direita.svg');
+
+  --batata-inteira: url('../assets/Vegetais_SVG/batata_inteira.svg');
+  --batata-esq: url('../assets/Vegetais_SVG/batata_esquerda.svg');
+  --batata-dir: url('../assets/Vegetais_SVG/batata_direita.svg');
+
+  --beringela-inteira: url('../assets/Vegetais_SVG/beringela_inteira.svg');
+  --beringela-esq: url('../assets/Vegetais_SVG/beringela_esquerda.svg');
+  --beringela-dir: url('../assets/Vegetais_SVG/beringela_direita.svg');
+
+  --brocolis-inteiro: url('../assets/Vegetais_SVG/brocolis_inteiro.svg');
+  --brocolis-esq: url('../assets/Vegetais_SVG/brocolis_esquerda.svg');
+  --brocolis-dir: url('../assets/Vegetais_SVG/brocolis_direita.svg');
+
+  --cebola-inteira: url('../assets/Vegetais_SVG/cebola_inteira.svg');
+  --cebola-esq: url('../assets/Vegetais_SVG/cebola_esquerda.svg');
+  --cebola-dir: url('../assets/Vegetais_SVG/cebola_direita.svg');
+
+  --cebola-roxa-inteira: url('../assets/Vegetais_SVG/cebola_roxa_Inteira.svg');
+  --cebola-roxa-esq: url('../assets/Vegetais_SVG/cebola_roxa_esquerda.svg');
+  --cebola-roxa-dir: url('../assets/Vegetais_SVG/cebola_roxa_direita.svg');
+
+  --pimentao-amarelo-inteiro: url('../assets/Vegetais_SVG/pimentao_amarelo_inteiro.svg');
+  --pimentao-amarelo-esq: url('../assets/Vegetais_SVG/pimentao_amarelo_esquerdo.svg');
+  --pimentao-amarelo-dir: url('../assets/Vegetais_SVG/pimentao_amarelo_direito.svg');
+
+  --pimentao-vermelho-inteiro: url('../assets/Vegetais_SVG/pimentao_vermelho_inteiro.svg');
+  --pimentao-vermelho-esq: url('../assets/Vegetais_SVG/pimentao_vermelho_esquerda.svg');
+  --pimentao-vermelho-dir: url('../assets/Vegetais_SVG/pimentao_vermelho_direita.svg');
+
+  --repolho-roxo-inteiro: url('../assets/Vegetais_SVG/repolho_roxo_inteiro.svg');
+  --repolho-roxo-esq: url('../assets/Vegetais_SVG/repolho_roxo_esquerda.svg');
+  --repolho-roxo-dir: url('../assets/Vegetais_SVG/repolho_roxo_direita.svg');
+
+  --tomate-inteiro: url('../assets/Vegetais_SVG/tomate_inteiro.svg');
+  --tomate-esq: url('../assets/Vegetais_SVG/tomate_esquerdo.svg');
+  --tomate-dir: url('../assets/Vegetais_SVG/tomate_direito.svg');
+  
+  --cor-fundo: #2c3e50; 
+  --cor-texto: #f1c40f;
+  --cor-rastro: rgba(255, 255, 255, 0.9);
+  --cor-rastro-brilho: 0 0 10px cyan;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+body {
+  background-color: var(--cor-fundo);
+  overflow: hidden; 
+  touch-action: none;
+  font-family: 'Arial', sans-serif;
+}
+
+img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+#game {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hud {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.vidas-container {
+  display: flex;
+  gap: 10px;
+}
+
+.vida-icon {
+  width: 40px;
+  height: 40px;
+  background-image: var(--asset-vida);
+  background-size: cover;
+  background-position: center;
+}
+
+.score-container {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--cor-texto);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.entidade {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  pointer-events: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bomba {
+  background-image: var(--asset-bomba);
+}
+
+.slash-line {
+  position: absolute;
+  height: 4px;
+  background-color: var(--cor-rastro);
+  box-shadow: var(--cor-rastro-brilho);
+  transform-origin: left center;
+  /* CRÍTICO: a lâmina NÃO PODE bloquear o rato, senão não cortam as frutas! */
+  pointer-events: none;
+  z-index: 999;
+  animation: sumir 0.3s ease-out forwards;
+}
+
+@keyframes sumir {
+  0% { opacity: 1; height: 4px; }
+  100% { opacity: 0; height: 0px; }
+}
