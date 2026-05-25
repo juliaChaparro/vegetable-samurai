@@ -123,3 +123,19 @@
     opacity: 0;
   }
 }
+
+/*------------------------------- Lamina---------------------------*/
+
+/* linha do corte */
+.corte{
+
+    position:absolute;
+
+    height:4px;
+
+    background: silver;
+
+    transform-origin:left center;
+
+    pointer-events:none;
+}
