@@ -1,30 +1,61 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vegetable Samurai</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+
     <div id="game">
-        
-        <div class="hud">
-            <div class="vidas-container">
-                <div class="vida-icon"></div>
-                <div class="vida-icon"></div>
-                <div class="vida-icon"></div>
+        <div id="hud">
+
+            <!-- Placar -->
+            <div id="hud-placar">
+                <span class="hud-label">SCORE</span>
+                <span id="hud-pontuacao">000000</span>
             </div>
-            
-            <div class="score-container">0</div>
+
+            <!-- Vidas (ícones SVG renderizados pelo Juiz._renderizarVidas) -->
+            <div id="hud-vidas"></div>
+
+            <!-- Feedback de Combo (aparece/some via JS) -->
+            <div id="hud-combo"></div>
+
         </div>
 
-        <div class="entidade bomba" style="top: 40%; left: 45%;"></div>
-        
+        <!-- ── Botão de teste isolado (Etapa 2 — remover na integração) ── -->
+        <button id="btn-teste-corte" style="
+    position:fixed; bottom:16px; right:16px; z-index:9999;
+    padding:10px 18px; background:#e74c3c; color:#fff;
+    border:none; border-radius:8px; cursor:pointer; font-size:14px;
+">🗡 Testar cortarAlvo()</button>
+
+        <script>
+            // Teste isolado da Etapa 2 — rode no navegador para validar o Juiz
+            document.getElementById('btn-teste-corte').addEventListener('click', () => {
+                // Cria uma fruta falsa no DOM para simular um corte
+                const frutaFalsa = document.createElement('div');
+                frutaFalsa.className = 'fruta';
+                frutaFalsa.dataset.tipo = 'tomate';
+                frutaFalsa.style.cssText = 'position:absolute;width:60px;height:60px;background:red;border-radius:50%;top:50%;left:50%;';
+                document.getElementById('game').appendChild(frutaFalsa);
+
+                // Pequeno delay para aparecer na tela antes de "cortar"
+                setTimeout(() => {
+                    Juiz.cortarAlvo(frutaFalsa);
+                }, 100);
+            });
+        </script>
     </div>
 
     <script src="js/config.js"></script>
+    <script src="js/score.js"></script>
+
+
 
     <script src="js/lamina.js"></script>
     <script src="js/entidades.js"></script>
@@ -32,5 +63,11 @@
 
     <script src="js/game.js"></script>
 
+    <script>
+        Juiz.init();
+    </script>
+
+
 </body>
+
 </html>
