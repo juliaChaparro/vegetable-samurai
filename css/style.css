@@ -127,15 +127,27 @@
 /*------------------------------- Lamina---------------------------*/
 
 /* linha do corte */
-.corte{
+#corte{
 
     position:absolute;
-
-    height:4px;
-
-    background: silver;
-
-    transform-origin:left center;
-
+    width:0px;
+    height:8px;
+    border-radius:999px;
     pointer-events:none;
+    transform-origin:left center;
+    opacity:0;
+    z-index:9999;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(255,255,255,0),
+        #7a7d80,
+        #7a7d80
+        );
+
+    filter:
+      blur(0.5px);
+
+    transition:
+      opacity 0,8s ease;
 }

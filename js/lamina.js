@@ -1,85 +1,101 @@
 class Lamina {
-    constructor() {
+
+    constructor(){
+        // posição atual do mouse
         this.posicaoAtualX = 0;
         this.posicaoAtualY = 0;
+
+        // posição anterior do mouse
         this.posicaoAnteriorX = 0;
-        this.posicaoAnteriorY=0;
+        this.posicaoAnteriorY = 0;
+
+        // verifica se o mouse está pressionado
         this.estaCortando = false;
 
-        document.addEventListener("mousemove", (evento) =>{
+        // pega a div do corte no HTML
+        this.corte = document.getElementById("corte");
+
+        // movimento do mouse
+        document.addEventListener("mousemove",(evento)=>{
             this.atualizarPosicaoMouse(evento);
-            
-             if(this.estaCortando){
-                this.desenharRastro();
+                if(this.estaCortando){
+                    this.desenharRastro();
+                }
             }
-            
-        });
+        );
 
-        document.addEventListener("mousedown", (evento) => {
-            this.atualizarPosicaoMouse(evento);
-            this.estaCortando = true;
-        });
+         // quando pressiona o mouse
+        document.addEventListener("mousedown",()=>{
+                this.estaCortando = true;
+            }
+        );
 
-        document.addEventListener("mouseup", (evento) => {
-            this.atualizarPosicaoMouse(evento);
+        // quando solta o mouse
+        document.addEventListener("mouseup",()=>{
             this.estaCortando = false;
-        });
+            // esconde o corte
+            this.corte.style.opacity = 0;
+            }
+        );
     }
 
+    // atualiza posição atual e anterior do mouse
     atualizarPosicaoMouse(evento){
         this.posicaoAnteriorX = this.posicaoAtualX;
         this.posicaoAnteriorY = this.posicaoAtualY;
-
         this.posicaoAtualX = evento.pageX;
         this.posicaoAtualY = evento.pageY;
-
-        console.log(`Posiçao Atual X:${this.posicaoAtualX}`);
-        console.log(`Posiçao Atual Y:${this.posicaoAtualY}`);
-        console.log(`Posicao Anterior X: ${this.posicaoAnteriorX}`);
-        console.log(`Posiçao Anterior Y:${this.posicaoAnteriorY}`);
     }
-
-
-    calcularDistanciaPontos(evento){
+    // calcula distância entre dois pontos
+    calcularDistanciaPontos(){
         const dx = this.posicaoAtualX - this.posicaoAnteriorX;
         const dy = this.posicaoAtualY - this.posicaoAnteriorY;
-        return Math.hypot(dx, dy);  // Retorna a distância em linha reta
+        return Math.hypot(dx, dy);
     }
-
+     // calcula ângulo da linha
     calcularAngulo(){
         const dx = this.posicaoAtualX - this.posicaoAnteriorX;
         const dy = this.posicaoAtualY - this.posicaoAnteriorY;
-        return Math.atan2(dy, dx); //Retorna o angulo 
+        return Math.atan2(dy, dx);
     }
-
+     // desenha o rastro do corte
     desenharRastro(){
-        const linha = document.createElement("div");
 
-        linha.classList.add("corte");
+        // calcula tamanho do movimento
         const distancia = this.calcularDistanciaPontos();
 
+        // ignora movimentos muito pequenos
+        if(distancia < 2){
+            return;
+        }
+
+        // calcula direção do corte
         const angulo = this.calcularAngulo();
 
-        // posição inicial
-        linha.style.left = this.posicaoAnteriorX + "px";
+         // define posição inicial
+        this.corte.style.left = this.posicaoAnteriorX + "px";
 
-        linha.style.top = this.posicaoAnteriorY + "px";
+        this.corte.style.top = this.posicaoAnteriorY + "px";
 
-        // tamanho da linha
-        linha.style.width = distancia + "px";
+         // aumenta largura conforme velocidade
+        this.corte.style.width = (distancia * 2.5) + "px";
 
-        // rotação
-        linha.style.transform = `rotate(${angulo}rad)`;
+        // direção
+        this.corte.style.transform = `rotate(${angulo}rad)`;
 
-        document.body.appendChild(linha);
+        // deixa visível
+        this.corte.style.opacity = 1;
 
-        // remove depois de um tempo
-        setTimeout(() => {
-            linha.remove();
+        // evita múltiplos timeouts
+        clearTimeout(this.timeout);
+
+        // faz desaparecer depois de 300ms
+        this.timeout = setTimeout(() => {
+
+            this.corte.style.opacity = 0;
+
         }, 300);
     }
-
 }
 
-const mouse = new Lamina();
-
+new Lamina();
