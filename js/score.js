@@ -2,8 +2,9 @@
 // Etapa 1: estrutura base do Juiz
 // Etapa 2: função cortarAlvo() + lógica de combos
 // =============================================================
+import { ESTADO_DO_JOGO } from "./config.js";
 
-const Juiz = {
+export const Juiz = {
   // ── Etapa 1: Propriedades internas ────────────────────────
   comboAtual: 0,
   tempoUltimoCorte: 0, // timestamp do último corte (ms)

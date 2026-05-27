@@ -1,4 +1,4 @@
-export class vegetable {
+export class Vegetable {
     
     /**
      * @abstract Classe base para representar um vegetal no jogo.

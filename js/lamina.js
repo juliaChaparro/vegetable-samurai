@@ -1,4 +1,4 @@
-class Lamina {
+ export class Lamina {
 
     constructor(){
         // posição atual do mouse
@@ -98,4 +98,3 @@ class Lamina {
     }
 }
 
-new Lamina();
