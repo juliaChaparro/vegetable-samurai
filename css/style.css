@@ -41,6 +41,8 @@
   --tomate-inteiro: url('../assets/Vegetais_SVG/tomate_inteiro.svg');
   --tomate-esq: url('../assets/Vegetais_SVG/tomate_esquerdo.svg');
   --tomate-dir: url('../assets/Vegetais_SVG/tomate_direito.svg');
+
+  --bg-jogo: url('../assets/background/Tela_Jogo.svg');
   
   --cor-fundo: #2c3e50; 
   --cor-texto: #f1c40f;
@@ -74,6 +76,10 @@ img {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-image: var(--bg-jogo);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hud {
@@ -94,8 +100,8 @@ img {
 #hud-vidas img,
 #hud-vidas svg,
 .vida-icon {
-  width: 40px !important;
-  height: 40px !important;
+  width: 80px !important;
+  height: 80px !important;
   object-fit: contain;
   filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.5)); 
 }

@@ -24,7 +24,7 @@
             </div>
 
         </div>
-        
+
         <div id="corte"></div>
 
         <button id="btn-teste-corte" style="
@@ -41,7 +41,7 @@
             font-size: 16px;
             font-weight: bold;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        ">🗡 Testar Corte (Juiz)</button>
+        ">Testar Corte</button>
 
     </div>
 
@@ -58,13 +58,11 @@
         if (typeof Juiz !== 'undefined') {
             Juiz.init();
         } else {
-            console.warn("⚠️ O objeto 'Juiz' não foi encontrado. O arquivo js/score.js está correto?");
+            console.warn("Juiz não encontrado");
         }
 
-        // Lógica do Botão de Teste
         document.getElementById('btn-teste-corte').addEventListener('click', () => {
             
-            // 1. Cria uma "fruta alvo" visualmente no centro da tela
             const frutaFalsa = document.createElement('div');
             frutaFalsa.className = 'entidade fruta';
             frutaFalsa.dataset.tipo = 'tomate';
@@ -72,7 +70,6 @@
             
             document.getElementById('game').appendChild(frutaFalsa);
 
-            // 2. Simula o corte após um pequeno delay para conseguirmos ver a fruta
             setTimeout(() => {
                 if (typeof Juiz !== 'undefined') {
                     Juiz.cortarAlvo(frutaFalsa);
