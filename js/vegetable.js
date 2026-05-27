@@ -5,7 +5,7 @@ export class Vegetable {
      * @param {Nome do Vegetal} name 
      * @param {Força de Gravidade relativa ao Vegetal} GRAVITY 
      */
-    constructor(name, GRAVITY) {
+    constructor(name, GRAVITY = 500) {
         this.name = name;
         this.tam = 80;  //tamanho base do vegetal (80px)
         this.positionX = 0;
