@@ -178,27 +178,30 @@ img {
 /*------------------------------- Lamina---------------------------*/
 
 /* linha do corte */
-#corte{
+.rastro{
 
-    position:absolute;
-    width:0px;
-    height:8px;
-    border-radius:999px;
-    pointer-events:none;
-    transform-origin:left center;
-    opacity:0;
-    z-index:9999;
+    position: fixed;
+
+    height: 10px;
+
+    pointer-events: none;
+
+    transform-origin: left center;
+
+    border-radius: 999px;
+
     background:
-      linear-gradient(
+    linear-gradient(
         90deg,
         rgba(255,255,255,0),
-        #7a7d80,
-        #7a7d80
-        );
+        rgba(255,255,255,0.5),
+        white
+    );
 
-    filter:
-      blur(0.5px);
-
-    transition:
-      opacity 0,8s ease;
+    clip-path: polygon(
+        0% 50%,
+        15% 0%,
+        100% 50%,
+        15% 100%
+    );
 }

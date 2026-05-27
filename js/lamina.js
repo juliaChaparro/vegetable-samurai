@@ -15,6 +15,20 @@ class Lamina {
         // pega a div do corte no HTML
         this.corte = document.getElementById("corte");
 
+        // ARRAY DOS RASTROS
+        this.rastros = [];
+
+        // indici do rastro atual
+        this.indiceRastro = 0;
+
+        // criaçao dos 5 div
+        for(let i = 0; i < 5; i++){
+            const rastro = document.createElement("div");
+            rastro.classList.add("rastro");
+            document.body.appendChild(rastro);
+            this.rastros.push(rastro);
+        }
+
         // movimento do mouse
         document.addEventListener("mousemove",(evento)=>{
             this.atualizarPosicaoMouse(evento);
@@ -24,6 +38,7 @@ class Lamina {
             }
         );
 
+        
          // quando pressiona o mouse
         document.addEventListener("mousedown",()=>{
                 this.estaCortando = true;
@@ -58,43 +73,62 @@ class Lamina {
         const dy = this.posicaoAtualY - this.posicaoAnteriorY;
         return Math.atan2(dy, dx);
     }
+
+
+    
      // desenha o rastro do corte
     desenharRastro(){
 
         // calcula tamanho do movimento
         const distancia = this.calcularDistanciaPontos();
 
+        //pega os 5 div criados
+        const rastro = this.rastros[this.indiceRastro];
+
         // ignora movimentos muito pequenos
-        if(distancia < 2){
+        if(distancia < 5){
             return;
         }
 
         // calcula direção do corte
         const angulo = this.calcularAngulo();
 
+        rastro.style.transition = "none";
+        rastro.style.opacity = 0;
+
          // define posição inicial
-        this.corte.style.left = this.posicaoAnteriorX + "px";
+        rastro.style.left = this.posicaoAnteriorX + "px";
 
-        this.corte.style.top = this.posicaoAnteriorY + "px";
+        rastro.style.top = this.posicaoAnteriorY + "px";
 
-         // aumenta largura conforme velocidade
-        this.corte.style.width = (distancia * 2.5) + "px";
+        rastro.style.width = (distancia * 2.5) + "px";
 
-        // direção
-        this.corte.style.transform = `rotate(${angulo}rad)`;
+        rastro.style.transform = `rotate(${angulo}rad)`;
+        
+        rastro.style.height = Math.min(distancia / 5, 12) + "px";
 
-        // deixa visível
-        this.corte.style.opacity = 1;
+        rastro.offsetHeight;
 
-        // evita múltiplos timeouts
-        clearTimeout(this.timeout);
+        rastro.style.transition = "opacity 0.05s linear";
 
-        // faz desaparecer depois de 300ms
-        this.timeout = setTimeout(() => {
+        rastro.style.opacity = 1;
+        clearTimeout(rastro.timeout);
 
-            this.corte.style.opacity = 0;
+        // faz desaparecer depois de 100ms
+        rastro.timeout = setTimeout(() => {
 
-        }, 300);
+            rastro.style.opacity = 0;
+
+        }, 100);
+
+        
+        // fica reutiçizando os div 
+        this.indiceRastro++;
+
+        if(this.indiceRastro >= 5){
+
+            this.indiceRastro = 0;
+        }
     }
 }
 
