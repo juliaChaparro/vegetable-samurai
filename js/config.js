@@ -1,5 +1,5 @@
 
-const ESTADO_DO_JOGO = {
+export const ESTADO_DO_JOGO = {
     vidas: 3,
     pontuacao: 0,
     melhorPontuacao: 0,
@@ -7,5 +7,6 @@ const ESTADO_DO_JOGO = {
     velocidadeInimigos: 1 
 };
 
-let hudVidas;
-let hudPontuacao;
+// Provavelmente codigo morrido
+// let hudVidas;
+// let hudPontuacao;

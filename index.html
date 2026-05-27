@@ -4,77 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vegetable Samurai - Teste</title>
+    <title>Vegetable Samurai</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
     <div id="game">
-        
-<div class="hud" id="hud">
 
+        <div class="hud" id="hud">
             <div id="hud-vidas" class="vidas-container"></div>
-
-            <div id="hud-combo" style="position: absolute; top: 60px; left: 20px; font-weight: bold; color: orange; font-size: 24px; display: none;"></div>
-
+            <div id="hud-combo"
+                style="position: absolute; top: 60px; left: 20px; font-weight: bold; color: orange; font-size: 24px; display: none;">
+            </div>
             <div id="hud-placar" class="score-container">
                 <span class="hud-label" style="font-size: 16px;">SCORE: </span>
-                <span id="hud-pontuacao">0</span>
+                <span id="hud-pontuacao">000000</span>
             </div>
-
         </div>
-
-        <button id="btn-teste-corte" style="
-            position: absolute; 
-            bottom: 20px; 
-            right: 20px; 
-            z-index: 9999;
-            padding: 12px 20px; 
-            background: #e74c3c; 
-            color: #fff;
-            border: 2px solid white; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        ">Testar Corte</button>
 
     </div>
 
-    <script src="js/config.js"></script>
-
-    <script src="js/score.js"></script> 
-    <script src="js/lamina.js"></script>
-    <script src="js/entidades.js"></script>
-
-    <script src="js/game.js"></script>
-
-    <script>
-        // Inicializa o Juiz para desenhar as vidas na tela ao abrir a página
-        if (typeof Juiz !== 'undefined') {
-            Juiz.init();
-        } else {
-            console.warn("Juiz não encontrado");
-        }
-
-        document.getElementById('btn-teste-corte').addEventListener('click', () => {
-            
-            const frutaFalsa = document.createElement('div');
-            frutaFalsa.className = 'entidade fruta';
-            frutaFalsa.dataset.tipo = 'tomate';
-            frutaFalsa.style.cssText = 'position: absolute; width: 60px; height: 60px; background: red; border-radius: 50%; top: 50%; left: 45%; border: 2px solid darkred; box-shadow: inset -10px -10px 10px rgba(0,0,0,0.3);';
-            
-            document.getElementById('game').appendChild(frutaFalsa);
-
-            setTimeout(() => {
-                if (typeof Juiz !== 'undefined') {
-                    Juiz.cortarAlvo(frutaFalsa);
-                }
-            }, 300); // Dá 300ms para o jogador ver a bola vermelha antes dela "explodir"
-        });
-    </script>
+    <script type="module" src="js/main.js"></script>
 
 </body>
+
 </html>

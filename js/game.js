@@ -1,4 +1,4 @@
-class MotorDoJogo {
+ export class MotorDoJogo {
     constructor() {
         this.telaAtual = 'menu'; 
         this.loopId = null;      
@@ -43,6 +43,3 @@ class MotorDoJogo {
         }
     }
 }
-
-const motor = new MotorDoJogo();
-motor.inicializar();
