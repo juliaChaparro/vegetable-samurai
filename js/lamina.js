@@ -1,5 +1,5 @@
  
- import { Colisao } from "./Colisao.js";
+ import { Colisao } from "./colisao.js";
  export class Lamina {
     
 
