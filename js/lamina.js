@@ -1,5 +1,5 @@
  
- import { Colisao } from "./Colisao.js";
+ import { Colisao } from "./colisao.js";
  export class Lamina {
     
 
@@ -128,12 +128,11 @@
 
         }, 100);
 
-        const vegetalAtingido = this.colisao.verificarColisaoRastro(rastro);
+        const vegetalAtingido = this.colisao.verificarColisaoRastro(this.posicaoAtualX,this.posicaoAtualY);
         
         // if(vegetalAtingido){
         //     this.motorDoJogo.vegetalFoiCortado(vegetalAtingido);
         // } 
-
         // fica reutiçizando os div 
         this.indiceRastro++;
 
