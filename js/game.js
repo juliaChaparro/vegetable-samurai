@@ -1,4 +1,5 @@
  export class MotorDoJogo {
+    
     constructor() {
         this.telaAtual = 'menu'; 
         this.loopId = null;      
@@ -41,5 +42,13 @@
             this.loopId = null;
             console.log("Loop pausado/parado.");
         }
+    }
+
+    //modificado
+    vegetalFoiCortado(vegetal){
+
+        console.log("Motor recebeu:", vegetal);
+
+        vegetal.despawn();
     }
 }

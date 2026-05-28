@@ -4,7 +4,6 @@ import { Lamina } from "./lamina.js";
 import { Juiz } from "./score.js"; 
 
 Juiz.init();
-new Lamina();
 
 
 const motor = new MotorDoJogo();
