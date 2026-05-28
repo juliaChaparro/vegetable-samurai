@@ -1,3 +1,6 @@
+import { Vegetable } from "./vegetable.js";
+
+
 export class Colisao {
 
     constructor(){
@@ -21,10 +24,9 @@ export class Colisao {
 
            if(colidiu && !vegetal.cortado){
             vegetal.vegetalReferencia.cortado = true;
-            return vegetal.vegetalReferencia;
+            vegetal.vegetalReferencia.despawn();
+            console.log("Colisão detectada com:", vegetal.vegetalReferencia.name);
             }
         }
-
-        return null;
     }
 }

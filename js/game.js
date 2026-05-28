@@ -44,11 +44,11 @@
         }
     }
 
-    //modificado
-    vegetalFoiCortado(vegetal){
+    // //modificado
+    // vegetalFoiCortado(vegetal){
 
-        console.log("Motor recebeu:", vegetal);
+    //     console.log("Motor recebeu:", vegetal);
 
-        vegetal.despawn();
-    }
+    //     vegetal.despawn();
+    // }
 }
