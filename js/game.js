@@ -3,7 +3,7 @@
         this.telaAtual = 'menu'; 
         this.loopId = null;      
 
-        this.listaDeInimigosAtivos = []; 
+        this.entidadesAtivas = []; 
         
         this.tabuleiro = document.getElementById('game');
     }
