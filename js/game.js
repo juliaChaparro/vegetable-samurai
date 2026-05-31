@@ -1,15 +1,21 @@
- export class MotorDoJogo {
+import { EntidadesDoJogo } from './entidades.js';
+import { ControladorDeSpawn } from './spawner.js';
+import { Utils } from './utils.js';
+export class MotorDoJogo {
     constructor() {
         this.telaAtual = 'menu'; 
         this.loopId = null;      
 
-        this.entidadesAtivas = []; 
-        
+        this.spawner;
+        this.entidades = new EntidadesDoJogo();
         this.tabuleiro = document.getElementById('game');
+        this.ultimoFrameTime = Date.now();
     }
 
     inicializar() {
         console.log("Inicializado!");
+        this.entidades.init();
+        this.spawner = new ControladorDeSpawn(this.entidades);
         this.mudarTela('menu');
     }
 
@@ -28,6 +34,31 @@
         if (this.loopId) this.pararLoop();
 
         const frameDoJogo = () => {
+            const agora = Date.now();
+            const deltaTime = (agora - this.ultimoFrameTime) / 1000; // em segundos
+            this.ultimoFrameTime = agora;
+
+            this.spawner.lancarVegetalUnico(deltaTime);
+            
+            // Update de todos os vegetais
+            this.entidades.vegetaisdoJogo.forEach(veg => {
+                veg.update(deltaTime);
+            });
+
+            // // Update de todos os obstáculos
+            // this.entidades.obstaculosdoJogo.forEach(obs => {
+            //     obs.update(deltaTime);
+            // });
+
+            // Render de todos os vegetais
+            this.entidades.vegetaisdoJogo.forEach(veg => {
+                veg.render();
+            });
+
+            // // Render de todos os obstáculos
+            // this.entidades.obstaculosdoJogo.forEach(obs => {
+            //     obs.render();
+            // });
                     
             this.loopId = requestAnimationFrame(frameDoJogo);
         };

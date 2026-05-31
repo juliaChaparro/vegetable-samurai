@@ -3,10 +3,15 @@ import { Juiz } from './score.js';
 import { Vegetable } from './vegetable.js';
 import { Lamina } from './lamina.js';
 import { Utils } from './utils.js';
+import { MotorDoJogo } from './game.js';
 
 export function iniciarDebug() {
     console.log("🛠️ Modo Debug Ativado!");
+    const jogoTeste = new MotorDoJogo();
+    jogoTeste.inicializar();
+    jogoTeste.mudarTela('jogando');
 
+    
     // 1. Cria o botão na tela
     const btnDebug = document.createElement('button');
     btnDebug.innerText = "Testar Corte";

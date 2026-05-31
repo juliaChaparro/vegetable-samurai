@@ -15,10 +15,10 @@ export class EntidadesDoJogo {
             let vegetal = new Vegetable(Utils.randomElemento(this.nomeVegetais));
             this.vegetaisdoJogo.push(vegetal);
         }
-        for(let i = 0; i < 30; i++){
-            let obstaculo = new Obstaculo(Utils.randomElemento(this.nomeObstaculos));
-            this.obstaculosdoJogo.push(obstaculo);
-        }
+        // for(let i = 0; i < 30; i++){
+        //     let obstaculo = new Obstaculo(Utils.randomElemento(this.nomeObstaculos));
+        //     this.obstaculosdoJogo.push(obstaculo);
+        // }
     }
 
     obterVegetalInativo(){
