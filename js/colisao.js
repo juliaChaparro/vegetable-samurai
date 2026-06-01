@@ -6,29 +6,39 @@ export class Colisao {
     constructor(){
 
     }
-    verificarColisaoRastro(mouseX, mouseY){
+    verificarColisaoRastro(x1, y1, x2, y2){
 
-        const vegetais = document.querySelectorAll(".vegetal");
+    const vegetais = document.querySelectorAll(".vegetal");
 
-        for(const vegetal of vegetais){
+    for(const vegetal of vegetais){
 
-            const vegetalObjeto = vegetal.vegetalReferencia;
+        const obj = vegetal.vegetalReferencia;
 
-            if(
-                !vegetalObjeto.ativo || vegetalObjeto.cortado
-            ){
-                continue;
-            }
+        if(!obj.ativo || obj.cortado){
+            continue;
+        }
 
-            const rect = vegetal.getBoundingClientRect();
+        const rect = vegetal.getBoundingClientRect();
+
+        const distancia = Math.hypot(x2 - x1, y2 - y1);
+
+        const passos = Math.ceil(distancia / 5);
+
+        for(let i = 0; i <= passos; i++){
+
+            const t = i / passos;
+
+            const x = x1 + (x2 - x1) * t;
+
+            const y = y1 + (y2 - y1) * t;
 
             const colidiu =
-                mouseX >= rect.left &&
-                mouseX <= rect.right &&
-                mouseY >= rect.top &&
-                mouseY <= rect.bottom;
+                x >= rect.left &&
+                x <= rect.right &&
+                y >= rect.top &&
+                y <= rect.bottom;
 
-           if(colidiu && !vegetal.cortado){
+           if(colidiu){
                 vegetal.vegetalReferencia.cortado = true;
                 vegetal.vegetalReferencia.despawn();
                 console.log("Colisão detectada com:", vegetal.vegetalReferencia.name);
@@ -36,3 +46,4 @@ export class Colisao {
         }
     }
 }
+} 

@@ -128,7 +128,7 @@
 
         }, 100);
 
-        const vegetalAtingido = this.colisao.verificarColisaoRastro(this.posicaoAtualX,this.posicaoAtualY);
+        const vegetalAtingido = this.colisao.verificarColisaoRastro(this.posicaoAnteriorX, this.posicaoAnteriorY,this.posicaoAtualX, this.posicaoAtualY);
         
         // if(vegetalAtingido){
         //     this.motorDoJogo.vegetalFoiCortado(vegetalAtingido);
