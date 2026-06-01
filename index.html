@@ -13,14 +13,27 @@
     <div id="game">
 
         <div class="hud" id="hud">
+
+            <!-- Vidas -->
             <div id="hud-vidas" class="vidas-container"></div>
-            <div id="hud-combo"
-                style="position: absolute; top: 60px; left: 20px; font-weight: bold; color: orange; font-size: 24px; display: none;">
+
+            <!-- Feedback de Combo -->
+            <div id="hud-combo" style="position:absolute; top:60px; left:20px;
+                font-weight:bold; color:orange; font-size:24px; display:none;">
             </div>
+
+            <!-- Placar atual -->
             <div id="hud-placar" class="score-container">
-                <span class="hud-label" style="font-size: 16px;">SCORE: </span>
+                <span class="hud-label" style="font-size:16px;">SCORE: </span>
                 <span id="hud-pontuacao">000000</span>
             </div>
+            <!-- Melhor pontuação (NOVO) -->
+            <div id="hud-best-placar" class="score-container"
+                style="position:absolute; top:40px; right:20px; text-align:right;"> <span class="hud-label"
+                    style="font-size:12px;">BEST: </span>
+                <span id="hud-best-score" style="font-size:20px; color:#FFD700;">000000</span>
+            </div>
+
         </div>
 
     </div>
