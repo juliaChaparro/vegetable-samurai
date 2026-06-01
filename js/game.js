@@ -53,7 +53,7 @@ export class MotorDoJogo {
                 veg.render();
             });
 
-            // // Render de todos os obstáculos
+            // // Render de todos os obstáculos do jogo
             // this.entidades.obstaculosdoJogo.forEach(obs => {
             //     obs.render();
             // });
