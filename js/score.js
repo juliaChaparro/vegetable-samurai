@@ -52,7 +52,7 @@ export const Juiz = {
     const base = "./assets/sfx/";
     const arquivos = {
       corte: "corte.mp3",
-      bomba: "bomba.mp3",
+      bomba: "bomba.wav",
       combo: "combo.mp3",
     };
 
