@@ -11,7 +11,7 @@ export function iniciarDebug() {
     jogoTeste.inicializar();
     jogoTeste.mudarTela('jogando');
 
-    
+
     // 1. Cria o botão na tela
     const btnDebug = document.createElement('button');
     btnDebug.innerText = "Testar Corte";
@@ -71,4 +71,21 @@ export function iniciarDebug() {
         }
     });
 
+    addEventListener('keydown', (e) => {
+        if (e.key === 'j') {
+            jogoTeste.spawner.lancarVegetalUnico();
+        }
+    });
+
+    addEventListener('keydown', (e) => {
+        if (e.key === 'k') {
+            jogoTeste.spawner.lancarVegetaisSequencia(3);
+        }
+    });
+
+    addEventListener('keydown', (e) => {
+        if (e.key === 'l') {
+            jogoTeste.spawner.lancarVegetalEspelhado();
+        }
+    });
 }

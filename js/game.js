@@ -38,8 +38,6 @@ export class MotorDoJogo {
             const deltaTime = (agora - this.ultimoFrameTime) / 1000; // em segundos
             this.ultimoFrameTime = agora;
 
-            this.spawner.lancarVegetalUnico(deltaTime);
-            
             // Update de todos os vegetais
             this.entidades.vegetaisdoJogo.forEach(veg => {
                 veg.update(deltaTime);
