@@ -43,6 +43,7 @@
   --tomate-dir: url('../assets/Vegetais_SVG/tomate_direito.svg');
 
   --bg-jogo: url('../assets/background/Tela_Jogo.svg');
+  --bg-menu: url('../assets/background/Menu.svg');
   
   --cor-fundo: #2c3e50; 
   --cor-texto: #f1c40f;
@@ -204,4 +205,83 @@ img {
         100% 50%,
         15% 100%
     );
+}    
+
+/* overlay de game over e tela de início */
+.tela-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; 
+}
+
+#tela-menu {
+  background-image: var(--bg-menu);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+    background-color: transparent; 
+}
+
+#tela-gameover {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.titulo-jogo {
+  font-size: 64px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px #2ecc71, 0 0 40px #27ae60; /* Brilho Verde */
+  margin-bottom: 20px;
+}
+
+.titulo-gameover {
+  font-size: 72px;
+  color: #e74c3c;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px #c0392b, 4px 4px 0 #000; /* Letra vermelha e sombreada */
+  margin-bottom: 30px;
+}
+
+.caixa-pontuacao-final {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--cor-texto);
+  padding: 20px 40px;
+  border-radius: 15px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+.caixa-pontuacao-final span {
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.caixa-pontuacao-final h2 {
+  font-size: 48px;
+  color: var(--cor-texto);
+  margin-top: 10px;
+}
+
+.instrucao-pisca {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 40px;
+  animation: piscar 1.5s infinite;
+}
+
+@keyframes piscar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
