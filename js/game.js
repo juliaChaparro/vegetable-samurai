@@ -71,4 +71,12 @@ export class MotorDoJogo {
             console.log("Loop pausado/parado.");
         }
     }
+
+    // //modificado
+    // vegetalFoiCortado(vegetal){
+
+    //     console.log("Motor recebeu:", vegetal);
+
+    //     vegetal.despawn();
+    // }
 }

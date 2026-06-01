@@ -1,6 +1,13 @@
+ 
+ import { Colisao } from "./colisao.js";
  export class Lamina {
+    
 
-    constructor(){
+    constructor(motorDoJogo){
+
+        this.desenharRastro = this.desenharRastro.bind(this);
+        this.motorDoJogo = motorDoJogo;
+
         // posição atual do mouse
         this.posicaoAtualX = 0;
         this.posicaoAtualY = 0;
@@ -11,16 +18,16 @@
 
         // verifica se o mouse está pressionado
         this.estaCortando = false;
-
-        // pega a div do corte no HTML
-        this.corte = document.getElementById("corte");
-
+       
         // ARRAY DOS RASTROS
         this.rastros = [];
 
         // indici do rastro atual
         this.indiceRastro = 0;
 
+        
+        this.colisao = new Colisao();
+        
         // criaçao dos 5 div
         for(let i = 0; i < 5; i++){
             const rastro = document.createElement("div");
@@ -48,8 +55,6 @@
         // quando solta o mouse
         document.addEventListener("mouseup",()=>{
             this.estaCortando = false;
-            // esconde o corte
-            this.corte.style.opacity = 0;
             }
         );
     }
@@ -112,6 +117,8 @@
         rastro.style.transition = "opacity 0.05s linear";
 
         rastro.style.opacity = 1;
+
+
         clearTimeout(rastro.timeout);
 
         // faz desaparecer depois de 100ms
@@ -121,7 +128,11 @@
 
         }, 100);
 
+        const vegetalAtingido = this.colisao.verificarColisaoRastro(this.posicaoAnteriorX, this.posicaoAnteriorY,this.posicaoAtualX, this.posicaoAtualY);
         
+        // if(vegetalAtingido){
+        //     this.motorDoJogo.vegetalFoiCortado(vegetalAtingido);
+        // } 
         // fica reutiçizando os div 
         this.indiceRastro++;
 
@@ -131,4 +142,5 @@
         }
     }
 }
+
 

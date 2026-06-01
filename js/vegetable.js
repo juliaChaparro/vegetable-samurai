@@ -27,6 +27,13 @@ export class Vegetable {
         this.sprite.style.width = this.tam + 'px';
         this.sprite.style.transformOrigin = 'center center';
         document.getElementById('game').appendChild(this.sprite);
+        
+       
+
+        // modificado
+        this.sprite.classList.add("vegetal");
+        this.sprite.vegetalReferencia = this;
+        this.cortado = false;
     }
 
     /**
@@ -49,6 +56,8 @@ export class Vegetable {
         this.positionY = positionY;
         this.ativo = true;
         this.sprite.style.display = 'block';
+
+        this.cortado = false;
 
         const alturaTela = document.getElementById('game').clientHeight || window.innerHeight;
         this.limiteTelaY = alturaTela - this.sprite.height;

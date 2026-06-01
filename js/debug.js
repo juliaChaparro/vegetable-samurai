@@ -3,6 +3,7 @@ import { Juiz } from './score.js';
 import { Vegetable } from './vegetable.js';
 import { Lamina } from './lamina.js';
 import { Utils } from './utils.js';
+import { Colisao } from "./colisao.js";
 import { MotorDoJogo } from './game.js';
 
 export function iniciarDebug() {
@@ -88,4 +89,11 @@ export function iniciarDebug() {
             jogoTeste.spawner.lancarVegetalEspelhado();
         }
     });
+
+/*____________________________Colisao______________________-*/
+
+
+const motor = new MotorDoJogo();
+
+const lamina = new Lamina(motor);
 }
