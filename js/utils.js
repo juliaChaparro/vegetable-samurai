@@ -47,7 +47,7 @@ export const Utils = {
     /**
      * Sorteia um item aleatório de dentro de um Array.
      * Excelente para o Spawner sortear se vai nascer 'tomate', 'repolho' ou 'bomba'.
-     * * @param {Array} array Lista de itens
+     * @param {Array} array Lista de itens
      * @returns {*} Um elemento aleatório da lista
      */
     randomElemento(array) {
