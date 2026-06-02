@@ -73,8 +73,8 @@ export class MotorDoJogo {
             const deltaTime = (agora - this.ultimoFrameTime) / 1000; // em segundos
             this.ultimoFrameTime = agora;
 
-            // Chama o spawner dentro do loop
-            if (this.spawner) this.spawner.update(deltaTime);
+            // // Chama o spawner dentro do loop
+            // if (this.spawner) this.spawner.update(deltaTime);
 
             // Update de todos os vegetais
             this.entidades.vegetaisdoJogo.forEach(veg => {
