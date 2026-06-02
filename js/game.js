@@ -1,6 +1,7 @@
 import { EntidadesDoJogo } from './entidades.js';
 import { ControladorDeSpawn } from './spawner.js';
 import { Utils } from './utils.js';
+
 export class MotorDoJogo {
     constructor() {
         this.telaAtual = 'menu'; 
@@ -33,30 +34,35 @@ export class MotorDoJogo {
     iniciarLoop() {
         if (this.loopId) this.pararLoop();
 
+        this.ultimoFrameTime = Date.now(); 
+
         const frameDoJogo = () => {
             const agora = Date.now();
             const deltaTime = (agora - this.ultimoFrameTime) / 1000; // em segundos
             this.ultimoFrameTime = agora;
+
+            // CORREÇÃO 2: Chama o spawner dentro do loop
+            if (this.spawner) this.spawner.update(deltaTime);
 
             // Update de todos os vegetais
             this.entidades.vegetaisdoJogo.forEach(veg => {
                 veg.update(deltaTime);
             });
 
-            // // Update de todos os obstáculos
-            // this.entidades.obstaculosdoJogo.forEach(obs => {
-            //     obs.update(deltaTime);
-            // });
+            // Update de todos os obstáculos
+            this.entidades.obstaculosdoJogo.forEach(obs => {
+                obs.update(deltaTime);
+            });
 
             // Render de todos os vegetais
             this.entidades.vegetaisdoJogo.forEach(veg => {
                 veg.render();
             });
 
-            // // Render de todos os obstáculos do jogo
-            // this.entidades.obstaculosdoJogo.forEach(obs => {
-            //     obs.render();
-            // });
+            // Render de todos os obstáculos do jogo
+            this.entidades.obstaculosdoJogo.forEach(obs => {
+                obs.render();
+            });
                     
             this.loopId = requestAnimationFrame(frameDoJogo);
         };
@@ -71,6 +77,7 @@ export class MotorDoJogo {
             console.log("Loop pausado/parado.");
         }
     }
+
 
     // //modificado
     // vegetalFoiCortado(vegetal){
