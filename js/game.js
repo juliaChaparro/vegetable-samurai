@@ -73,28 +73,28 @@ export class MotorDoJogo {
             const deltaTime = (agora - this.ultimoFrameTime) / 1000; // em segundos
             this.ultimoFrameTime = agora;
 
-            // Chama o spawner dentro do loop
-            if (this.spawner) this.spawner.update(deltaTime);
+            // // Chama o spawner dentro do loop
+            // if (this.spawner) this.spawner.update(deltaTime);
 
             // Update de todos os vegetais
             this.entidades.vegetaisdoJogo.forEach(veg => {
                 veg.update(deltaTime);
             });
 
-            // Update de todos os obstáculos
-            this.entidades.obstaculosdoJogo.forEach(obs => {
-                obs.update(deltaTime);
-            });
+            // // Update de todos os obstáculos
+            // this.entidades.obstaculosdoJogo.forEach(obs => {
+            //     obs.update(deltaTime);
+            // });
 
             // Render de todos os vegetais
             this.entidades.vegetaisdoJogo.forEach(veg => {
                 veg.render();
             });
 
-            // Render de todos os obstáculos do jogo
-            this.entidades.obstaculosdoJogo.forEach(obs => {
-                obs.render();
-            });
+            // // Render de todos os obstáculos do jogo
+            // this.entidades.obstaculosdoJogo.forEach(obs => {
+            //     obs.render();
+            // });
                     
             this.loopId = requestAnimationFrame(frameDoJogo);
         };
