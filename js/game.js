@@ -52,6 +52,15 @@ export class MotorDoJogo {
         }
     }
 
+    encerrarJogo(pontuacaoFinal) {
+        const textoScoreFinal = document.getElementById('score-final');
+        if (textoScoreFinal) {
+            textoScoreFinal.innerText = pontuacaoFinal;
+        }
+        
+        this.mudarTela('gameover');
+    }
+
     iniciarLoop() {
         if (this.loopId) this.pararLoop();
 

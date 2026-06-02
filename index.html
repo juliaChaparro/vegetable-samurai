@@ -13,28 +13,58 @@
 
     <div id="game">
 
+        <div id="corte"></div>
+
         <div class="hud" id="hud">
 
-            <!-- Vidas -->
             <div id="hud-vidas" class="vidas-container"></div>
 
-            <!-- Feedback de Combo -->
             <div id="hud-combo" style="position:absolute; top:60px; left:20px;
                 font-weight:bold; color:orange; font-size:24px; display:none;">
             </div>
 
-            <!-- Placar atual -->
             <div id="hud-placar" class="score-container">
                 <span class="hud-label" style="font-size:16px;">SCORE: </span>
                 <span id="hud-pontuacao">000000</span>
             </div>
-            <!-- Melhor pontuação (NOVO) -->
+            
             <div id="hud-best-placar" class="score-container"
                 style="position:absolute; top:40px; right:20px; text-align:right;"> <span class="hud-label"
                     style="font-size:12px;">BEST: </span>
                 <span id="hud-best-score" style="font-size:20px; color:#FFD700;">000000</span>
             </div>
 
+        </div>
+
+        <div id="tela-menu" class="tela-overlay">
+            <h1 class="titulo-jogo">Vegetable<br>Samurai</h1>
+            <p class="instrucao-pisca">Arraste a lâmina para jogar</p>
+            <img src="assets/background/Katana_Botao.svg" id="botao-jogar" class="alvo-menu" style="width: 150px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
+        </div>
+
+        <div id="tela-gameover" class="tela-overlay" style="display: none;">
+            <h1 class="titulo-gameover">FIM DE JOGO</h1>
+            
+            <div class="caixa-pontuacao-final">
+                <span>Pontuação Final</span>
+                <h2 id="score-final">0</h2>
+            </div>
+            
+            <p class="instrucao-pisca">Corte a sua escolha</p>
+            
+            <div style="display: flex; gap: 50px; margin-top: 20px;">
+                
+                <div style="text-align: center;">
+                    <img src="assets/Vegetais_SVG/maca_verde.svg" id="botao-reiniciar" class="alvo-menu" style="width: 100px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
+                    <p style="color: white; font-weight: bold; margin-top: 10px;">REINICIAR</p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="assets/nuclear_bomb_enemy.svg" id="botao-voltar-menu" class="alvo-menu" style="width: 100px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
+                    <p style="color: white; font-weight: bold; margin-top: 10px;">MENU</p>
+                </div>
+                
+            </div>
         </div>
 
     </div>
