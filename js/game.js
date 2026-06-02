@@ -6,10 +6,18 @@ export class MotorDoJogo {
     constructor() {
         this.telaAtual = 'menu'; 
         this.loopId = null;      
+        
+        // NOVA VARIÁVEL DE CONTROLE
+        this.jogoRodando = false; 
 
         this.spawner;
         this.entidades = new EntidadesDoJogo();
         this.tabuleiro = document.getElementById('game');
+        
+        // Elementos da UI
+        this.telaMenu = document.getElementById('tela-menu');
+        this.telaGameOver = document.getElementById('tela-gameover');
+        
         this.ultimoFrameTime = Date.now();
     }
 
@@ -24,10 +32,23 @@ export class MotorDoJogo {
         this.telaAtual = novaTela;
         console.log(`Mudança de tela para -> ${this.telaAtual}`);
 
+        // Oculta todas as telas de overlay por padrão
+        if (this.telaMenu) this.telaMenu.style.display = 'none';
+        if (this.telaGameOver) this.telaGameOver.style.display = 'none';
+
         if (this.telaAtual === 'jogando') {
+            this.jogoRodando = true; // Libera o jogo
             this.iniciarLoop();
         } else {
+            this.jogoRodando = false; // Trava o jogo
             this.pararLoop();
+            
+            // Mostra a tela correta dependendo do estado
+            if (this.telaAtual === 'menu' && this.telaMenu) {
+                this.telaMenu.style.display = 'flex';
+            } else if (this.telaAtual === 'gameover' && this.telaGameOver) {
+                this.telaGameOver.style.display = 'flex';
+            }
         }
     }
 
@@ -37,11 +58,13 @@ export class MotorDoJogo {
         this.ultimoFrameTime = Date.now(); 
 
         const frameDoJogo = () => {
+            if (!this.jogoRodando) return;
+
             const agora = Date.now();
             const deltaTime = (agora - this.ultimoFrameTime) / 1000; // em segundos
             this.ultimoFrameTime = agora;
 
-            // CORREÇÃO 2: Chama o spawner dentro do loop
+            // Chama o spawner dentro do loop
             if (this.spawner) this.spawner.update(deltaTime);
 
             // Update de todos os vegetais
@@ -77,7 +100,6 @@ export class MotorDoJogo {
             console.log("Loop pausado/parado.");
         }
     }
-
 
     // //modificado
     // vegetalFoiCortado(vegetal){
