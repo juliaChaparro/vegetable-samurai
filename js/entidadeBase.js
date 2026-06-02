@@ -1,12 +1,12 @@
-export class Vegetable {
+export class EntidadeBase {
 
     /**
-     * @abstract Classe base para representar um vegetal no jogo.
-     * @param {Força de Gravidade relativa ao Vegetal} GRAVITY 
+     * @abstract Classe base genérica para representar uma entidade no jogo.
+     * @param {number} GRAVITY Força de Gravidade relativa à Entidade
      */
     constructor(nome = 'tomate', GRAVITY = 500) {
         this.name = nome;
-        this.tam = 80;  //tamanho base do vegetal (80px)
+        this.tam = 80;  //tamanho base (80px)
         this.positionX = 0;
         this.positionY = 0;
         this.velocityX = 0;
@@ -28,27 +28,27 @@ export class Vegetable {
         this.sprite.style.transformOrigin = 'center center';
         document.getElementById('game').appendChild(this.sprite);
         
-       
-
-        // modificado
-        this.sprite.classList.add("vegetal");
-        this.sprite.vegetalReferencia = this;
+        // --- MODIFICAÇÕES DA REFATORAÇÃO GENÉRICA ---
+        this.sprite.classList.add("entidadeDoJogo");
+        
+        // Mudei de 'vegetalReferencia' para 'entidadeReferencia'
+        this.sprite.entidadeReferencia = this; 
         this.cortado = false;
     }
 
     /**
-     * @brief Define o sprite do vegetal com base no nome fornecido.
-     * @param {*Nome do vegetal} nomeVegetal 
+     * @brief Define o sprite da entidade com base no nome fornecido.
+     * @param {string} nomeEntidade Nome do arquivo SVG
      */
-    definirSprite(nomeVegetal = 'tomate') {
-        this.name = nomeVegetal;
-        this.sprite.src = `./assets/Vegetais_SVG/${nomeVegetal}_i.svg`;
+    definirSprite(nomeEntidade = 'tomate') {
+        this.name = nomeEntidade;
+        this.sprite.src = `./assets/Vegetais_SVG/${nomeEntidade}_i.svg`;
     }
 
     /**
-     * @brief Posiciona o vegetal na tela e o torna ativo.
-     * @param {*Posição X do vegetal} positionX 
-     * @param {*Posição Y do vegetal} positionY 
+     * @brief Posiciona a entidade na tela e a torna ativa.
+     * @param {number} positionX 
+     * @param {number} positionY 
      */
     spawn(positionX, positionY) {
         console.log(`Spawnando ${this.name} na posição (${positionX}, ${positionY})`);
@@ -65,8 +65,8 @@ export class Vegetable {
     }
 
     /**
-     * @brief Desativa o vegetal e o remove da tela.
-     * @param {*Tipo de despawn, pode ser por sair do mapa('normal') ou pela lâmina('corte')} tipo
+     * @brief Desativa a entidade e a remove da tela.
+     * @param {string} tipo Tipo de despawn, pode ser por sair do mapa ('normal') ou pela lâmina ('corte')
     */
     despawn(tipo = 'normal') {
         this.ativo = false;
@@ -77,24 +77,23 @@ export class Vegetable {
             //Adicionar depois função de emitir partículas.
             console.log(`Soltando Pedaços!!`);
         }
-
     }
 
     /**
-     * @brief Arremessa o vegetal com uma determinada força e ângulo.
-     * @param {*Ângulo do arremesso em graus} anguloGraus 
-     * @param {*Força total do arremesso} forcaTotal 
+     * @brief Arremessa a entidade com uma determinada força e ângulo.
+     * @param {number} anguloGraus Ângulo do arremesso em graus
+     * @param {number} forcaTotal Força total do arremesso
     */
     arremessar(anguloGraus, forcaTotal) {
         const radianos = anguloGraus * (Math.PI / 180);
         this.velocityX = Math.cos(radianos) * forcaTotal;
         this.velocityY = -Math.sin(radianos) * forcaTotal;
-        this.rotationSpeed = (Math.random() - 0.5) * 720; // Rotação aleatória entre -360 e 360 graus por segundo)
+        this.rotationSpeed = (Math.random() - 0.5) * 720; // Rotação aleatória entre -360 e 360 graus por segundo
     }
 
     /**
-    * @brief Ajusta o tamanho do vegetal multiplicando pelo fator fornecido.
-    * @param {escala em que o vegetal é aumentado/diminuido} factor 
+    * @brief Ajusta o tamanho da entidade multiplicando pelo fator fornecido.
+    * @param {number} factor Escala em que a entidade é aumentada/diminuida
     */
     sizeScale(factor) {
         this.sprite.style.width = `${this.tam * factor}px`;
@@ -102,8 +101,8 @@ export class Vegetable {
     }
 
     /**
-     * @brief Atualiza a posição do vegetal com base na física de movimento e gravidade.
-     * @param {*Tempo decorrido desde a última atualização} deltaTime
+     * @brief Atualiza a posição da entidade com base na física de movimento e gravidade.
+     * @param {number} deltaTime Tempo decorrido desde a última atualização
     */
     update(deltaTime) {
         if (this.ativo) {
@@ -111,6 +110,7 @@ export class Vegetable {
             this.positionX += (this.velocityX * deltaTime);
             this.positionY += (this.velocityY * deltaTime);
             this.rotation += this.rotationSpeed * deltaTime;
+            
             if ((this.velocityY >= 0 && this.positionY >= this.limiteTelaY + (this.tam + 10)) || (this.positionX >= this.limiteTelaX + (this.tam + 10)) || (this.positionX < - (this.tam + 10))) {
                 this.despawn();
             }
@@ -118,7 +118,7 @@ export class Vegetable {
     }
 
     /*
-     * @brief Renderiza o vegetal na tela.
+     * @brief Renderiza a entidade na tela.
      */
     render() {
         if (!this.ativo) return;
