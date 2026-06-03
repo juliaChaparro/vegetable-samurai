@@ -3,7 +3,7 @@ import { EntidadeBase } from './entidadeBase.js';
 export class Madeira extends EntidadeBase {
     constructor(nome = 'madeira') {
         // Gravidade intermediária (600)
-        super(nome, 600);
+        super(nome, 600, 150);
         this.sprite.classList.add("obstaculo", "madeira");
     }
 

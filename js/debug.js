@@ -78,7 +78,7 @@ export function iniciarDebug() {
     // Spawners integrados com as novas funções genéricas
     addEventListener('keydown', (e) => {
         if (e.key === 'j') {
-            jogoTeste.spawner.lancarEntidadeUnica('vegetal');
+            jogoTeste.spawner.lancarEntidadeUnica('obstaculo');
         }
     });
 

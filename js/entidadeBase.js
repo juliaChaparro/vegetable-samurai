@@ -4,9 +4,9 @@ export class EntidadeBase {
      * @abstract Classe base genérica para representar uma entidade no jogo.
      * @param {number} GRAVITY Força de Gravidade relativa à Entidade
      */
-    constructor(nome = 'tomate', GRAVITY = 500) {
+    constructor(nome = 'tomate', GRAVITY = 500, tam=80) {
         this.name = nome;
-        this.tam = 80;  //tamanho base (80px)
+        this.tam = tam;  //tamanho base (80px)
         this.positionX = 0;
         this.positionY = 0;
         this.velocityX = 0;

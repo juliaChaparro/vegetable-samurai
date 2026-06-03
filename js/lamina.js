@@ -130,10 +130,6 @@
 
         const vegetalAtingido = this.colisao.verificarColisaoRastro(this.posicaoAnteriorX, this.posicaoAnteriorY,this.posicaoAtualX, this.posicaoAtualY);
         
-        // if(vegetalAtingido){
-        //     this.motorDoJogo.vegetalFoiCortado(vegetalAtingido);
-        // } 
-        // fica reutiçizando os div 
         this.indiceRastro++;
 
         if(this.indiceRastro >= 5){

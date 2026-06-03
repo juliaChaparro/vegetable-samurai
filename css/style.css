@@ -1,6 +1,7 @@
 :root {
   --asset-vida: url('../assets/Moeda_vida.svg');
-  --asset-bomba: url('../assets/nuclear_bomb_enemy.svg');
+  --asset-bomba: url('../assets/Vegetais_SVG/bomba_i.svg');
+  --asset-madeira: url('../assets/Vegetais_SVG/madeira_i.svg');
   
   --abobora-inteira: url('../assets/Vegetais_SVG/abobora_Inteira.svg');
   --abobora-esq: url('../assets/Vegetais_SVG/abobora_Esquerda.svg');
