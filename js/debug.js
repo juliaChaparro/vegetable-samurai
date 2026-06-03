@@ -1,17 +1,19 @@
 // Importa o Juiz para podermos fatiar a fruta falsa
 import { Juiz } from './score.js';
-import { Vegetable } from './vegetable.js';
+import { Vegetal } from './vegetal.js';
 import { Lamina } from './lamina.js';
 import { Utils } from './utils.js';
-import { Colisao } from "./colisao.js";
 import { MotorDoJogo } from './game.js';
 
 export function iniciarDebug() {
     console.log("🛠️ Modo Debug Ativado!");
+    
     const jogoTeste = new MotorDoJogo();
     jogoTeste.inicializar();
     jogoTeste.mudarTela('jogando');
 
+    // A lâmina agora escuta o motor de teste correto
+    const lamina = new Lamina(jogoTeste);
 
     // 1. Cria o botão na tela
     const btnDebug = document.createElement('button');
@@ -36,7 +38,7 @@ export function iniciarDebug() {
     // 2. Lógica do clique (cria a fruta e manda o Juiz cortar)
     btnDebug.addEventListener('click', () => {
         const frutaFalsa = document.createElement('div');
-        frutaFalsa.className = 'entidade fruta';
+        frutaFalsa.className = 'entidadeDoJogo fruta';
         frutaFalsa.dataset.tipo = 'tomate';
         frutaFalsa.style.cssText = 'position: absolute; width: 60px; height: 60px; background: red; border-radius: 50%; top: 50%; left: 45%; border: 2px solid darkred; box-shadow: inset -10px -10px 10px rgba(0,0,0,0.3);';
 
@@ -47,13 +49,14 @@ export function iniciarDebug() {
         }, 300);
     });
 
-// Teste Vegetais
+    // Teste Vegetais usando a nova classe
     const vegetaisDisponiveis = ['tomate', 'repolhoroxo', 'cebola', 'berinjela', 'batata'];
     const arrayVegetais = [];
     vegetaisDisponiveis.forEach(tipo => {
-        arrayVegetais.push(new Vegetable(tipo));
+        arrayVegetais.push(new Vegetal(tipo));
     });
-//Atalho para criar um vegetal um dos 5 vegetais na tela, em posições aleatórias.
+
+    //Atalho para criar um dos 5 vegetais na tela, em posições aleatórias.
     addEventListener('keydown', (e) => {
         if (e.key === 'a') {
             let veg = Utils.randomElemento(arrayVegetais);
@@ -72,28 +75,22 @@ export function iniciarDebug() {
         }
     });
 
+    // Spawners integrados com as novas funções genéricas
     addEventListener('keydown', (e) => {
         if (e.key === 'j') {
-            jogoTeste.spawner.lancarVegetalUnico();
+            jogoTeste.spawner.lancarEntidadeUnica('vegetal');
         }
     });
 
     addEventListener('keydown', (e) => {
         if (e.key === 'k') {
-            jogoTeste.spawner.lancarVegetaisSequencia(3);
+            jogoTeste.spawner.lancarEntidadeSequencia(3, 'vegetal');
         }
     });
 
     addEventListener('keydown', (e) => {
         if (e.key === 'l') {
-            jogoTeste.spawner.lancarVegetalEspelhado();
+            jogoTeste.spawner.lancarEntidadeEspelhada('vegetal');
         }
     });
-
-/*____________________________Colisao______________________-*/
-
-
-const motor = new MotorDoJogo();
-
-const lamina = new Lamina(motor);
 }
