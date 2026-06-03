@@ -1,5 +1,6 @@
 import { Vegetal } from './vegetal.js';
-import { Obstaculo } from './obstaculo.js';
+import { Bomba } from './bomba.js';
+import { Madeira } from './madeira.js';
 import { Utils } from './utils.js';
 
 export class EntidadesDoJogo {
@@ -12,24 +13,26 @@ export class EntidadesDoJogo {
     }
 
     init() {
-        for(let i = 0; i < 30; i++) {
+        
+        for (let i = 0; i < 30; i++) {
             this.vegetaisdoJogo.push(new Vegetal(Utils.randomElemento(this.nomeVegetais)));
         }
         
-        for(let i = 0; i < 15; i++) {
-            this.obstaculosdoJogo.push(new Obstaculo(Utils.randomElemento(this.nomeObstaculos)));
+        for (let i = 0; i < 15; i++) {
+            let tipoSorteado = Utils.randomElemento(this.nomeObstaculos);
+            
+            if (tipoSorteado === 'bomba') {
+                this.obstaculosdoJogo.push(new Bomba(tipoSorteado));
+            } else {
+                this.obstaculosdoJogo.push(new Madeira(tipoSorteado));
+            }
         }
     }
 
-    /**
-     * O Spawner/Dificuldade pede o que quer puxar da garagem.
-     * Ex: entidades.obterInativo('obstaculo')
-     */
     obterInativo(categoria = 'vegetal') {
         if (categoria === 'obstaculo') {
             return this.obstaculosdoJogo.find(obs => !obs.ativo);
         }
-        // Padrão: devolve fruta
         return this.vegetaisdoJogo.find(veg => !veg.ativo);
     }
 
