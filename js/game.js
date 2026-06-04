@@ -7,7 +7,6 @@ export class MotorDoJogo {
         this.telaAtual = 'menu'; 
         this.loopId = null;      
         
-        // NOVA VARIÁVEL DE CONTROLE
         this.jogoRodando = false; 
 
         this.spawner;
@@ -28,8 +27,6 @@ export class MotorDoJogo {
             this.encerrarJogo(225);  //testando apenas
         });
         
-        this.entidades.init();
-        this.spawner = new ControladorDeSpawn(this.entidades);
         this.mudarTela('menu');
     }
 
@@ -37,18 +34,20 @@ export class MotorDoJogo {
         this.telaAtual = novaTela;
         console.log(`Mudança de tela para -> ${this.telaAtual}`);
 
-        // Oculta todas as telas de overlay por padrão
         if (this.telaMenu) this.telaMenu.style.display = 'none';
         if (this.telaGameOver) this.telaGameOver.style.display = 'none';
 
         if (this.telaAtual === 'jogando') {
-            this.jogoRodando = true; // Libera o jogo
+            this.jogoRodando = true; 
+            
+            this.entidades.init();
+            this.spawner = new ControladorDeSpawn(this.entidades);
+            
             this.iniciarLoop();
         } else {
             this.jogoRodando = false; // Trava o jogo
             this.pararLoop();
             
-            // Mostra a tela correta dependendo do estado
             if (this.telaAtual === 'menu' && this.telaMenu) {
                 this.telaMenu.style.display = 'flex';
             } else if (this.telaAtual === 'gameover' && this.telaGameOver) {
@@ -77,6 +76,11 @@ export class MotorDoJogo {
             const agora = Date.now();
             const deltaTime = (agora - this.ultimoFrameTime) / 1000; // em segundos
             this.ultimoFrameTime = agora;
+
+            if (this.spawner) {
+                this.spawner.update(deltaTime);
+            }
+
             let entidadesAtivas = this.entidades.todasAtivas;
             entidadesAtivas.forEach(entidade => {
                 entidade.update(deltaTime);
@@ -96,12 +100,4 @@ export class MotorDoJogo {
             console.log("Loop pausado/parado.");
         }
     }
-
-    // //modificado
-    // vegetalFoiCortado(vegetal){
-
-    //     console.log("Motor recebeu:", vegetal);
-
-    //     vegetal.despawn();
-    // }
 }

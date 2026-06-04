@@ -192,6 +192,8 @@ img {
 
     border-radius: 999px;
 
+    z-index: 9999;
+
     background:
     linear-gradient(
         90deg,
@@ -220,7 +222,7 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 2000; 
+  z-index: 9999; 
 }
 
 #tela-menu {
