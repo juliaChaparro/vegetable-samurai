@@ -54,6 +54,12 @@ export class EntidadeBase {
         console.log(`Spawnando ${this.name} na posição (${positionX}, ${positionY})`);
         this.positionX = positionX;
         this.positionY = positionY;
+        this.rotation = 0;
+
+        // Aplica o transform ANTES de exibir o sprite, evitando o frame
+        // em que ele apareceria na posição antiga (causa da "piscada").
+        this.sprite.style.transform = `translate(${positionX}px, ${positionY}px) rotate(0deg)`;
+
         this.ativo = true;
         this.sprite.style.display = 'block';
 
