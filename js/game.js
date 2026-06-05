@@ -1,6 +1,7 @@
 import { EntidadesDoJogo } from "./entidades.js";
 import { ControladorDeSpawn } from "./spawner.js";
 import { Utils } from "./utils.js";
+import { DiretorDeJogo } from './diretor.js';
 
 export class MotorDoJogo {
   constructor() {
@@ -8,7 +9,7 @@ export class MotorDoJogo {
     this.loopId = null;
 
     this.jogoRodando = false;
-
+    this.diretor;
     this.spawner;
     this.entidades = new EntidadesDoJogo();
     this.tabuleiro = document.getElementById("game");
@@ -24,7 +25,7 @@ export class MotorDoJogo {
     console.log("Inicializado!");
 
     window.addEventListener("bombaExplodiu", () => {
-      this.encerrarJogo(225); //testando apenas
+      this.encerrarJogo(225); 
     });
 
     this.mudarTela("menu");
@@ -42,7 +43,7 @@ export class MotorDoJogo {
 
       this.entidades.init();
       this.spawner = new ControladorDeSpawn(this.entidades);
-
+      this.diretor = new DiretorDeJogo(this.spawner);
       this.iniciarLoop();
     } else {
       this.jogoRodando = false; // Trava o jogo
@@ -77,16 +78,13 @@ export class MotorDoJogo {
       const deltaTime = (agora - this.ultimoFrameTime) / 1000; // em segundos
       this.ultimoFrameTime = agora;
 
-      /* if (this.spawner) {
-                this.spawner.update(deltaTime);
-            }
-            */
-
       let entidadesAtivas = this.entidades.todasAtivas;
       entidadesAtivas.forEach((entidade) => {
         entidade.update(deltaTime);
         entidade.render();
       });
+
+      if (this.diretor) this.diretor.update(deltaTime);
 
       this.loopId = requestAnimationFrame(frameDoJogo);
     };
