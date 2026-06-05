@@ -288,3 +288,28 @@ img {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
+
+/* Animação para dar vida aos vegetais do menu */
+@keyframes flutuar {
+    0% {
+        transform: translateY(0px) rotate(-2deg) scale(1);
+    }
+    50% {
+        transform: translateY(-12px) rotate(3deg) scale(1.05);
+    }
+    100% {
+        transform: translateY(0px) rotate(-2deg) scale(1);
+    }
+}
+
+.alvo-menu {
+    /* Aplica a animação infinita com uma transição suave */
+    animation: flutuar 3s ease-in-out infinite;
+    cursor: crosshair; /* Muda o mouse para parecer uma mira/lâmina */
+    transition: filter 0.3s ease;
+}
+
+/* Dá um brilho extra quando o mouse (ou a lâmina) passa perto */
+.alvo-menu:hover {
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)) brightness(1.2) !important;
+}
