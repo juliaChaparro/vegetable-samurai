@@ -8,7 +8,7 @@ import { EntidadeBase } from "./entidadeBase.js";
 
 export class Bomba extends EntidadeBase {
   constructor(nome = "bomba") {
-    super(nome, 700, 250);
+    super(nome, 700, 120);
     this.sprite.classList.add("obstaculo", "bomba");
   }
 
