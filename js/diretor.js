@@ -5,18 +5,7 @@
 // O DiretorDeJogo é o maestro da partida: ele observa o
 // tempoDePartida e decide, a cada update(), qual padrão de
 // lançamento acionar no ControladorDeSpawn.
-//
-// Dependências:
-//   ControladorDeSpawn  (spawner.js)   — executa os lançamentos
-//   ESTADO_DO_JOGO      (config.js)    — lê pontuação e vidas
-//
-// Como integrar em game.js:
-//   import { DiretorDeJogo } from './diretor.js';
-//   // dentro de mudarTela('jogando'):
-//   this.diretor = new DiretorDeJogo(this.spawner);
-//   // dentro do frameDoJogo, após update das entidades:
-//   if (this.diretor) this.diretor.update(deltaTime);
-// =============================================================
+
 
 import { ControladorDeSpawn } from './spawner.js';
 import { ESTADO_DO_JOGO } from './config.js';

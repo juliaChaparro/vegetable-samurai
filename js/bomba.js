@@ -3,7 +3,6 @@
 // Responsável: Membro 3
 // Modificado: Membro 4 passa as coordenadas no CustomEvent
 //             para o Juiz criar a explosão no lugar certo
-// =============================================================
 import { EntidadeBase } from "./entidadeBase.js";
 
 export class Bomba extends EntidadeBase {
