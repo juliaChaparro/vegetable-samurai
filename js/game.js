@@ -70,6 +70,9 @@ export class MotorDoJogo {
         this.entidades.init();
         this.spawner = new ControladorDeSpawn(this.entidades);
         this.diretor = new DiretorDeJogo(this.spawner);
+
+        //Inicia a soundtrack
+        Juiz.tocarBGM();
       }
 
       if (cortina) cortina.classList.remove('ativa');
@@ -88,6 +91,9 @@ export class MotorDoJogo {
   encerrarJogo(pontuacaoFinal) {
     this.jogoRodando = false;
     this.pararLoop();
+
+    //Desliga a soundtrack
+    Juiz.pararBGM();
 
     const textoScoreFinal = document.getElementById("score-final");
     if (textoScoreFinal) {

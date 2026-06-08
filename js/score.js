@@ -58,7 +58,7 @@ export const Juiz = {
   tocarSom(nome) {
     if (this.sfx) this.sfx.tocar(nome);
   },
-  
+
   // ── Ponto de entrada: vegetal cortado ─────────────────────
 
   /**
@@ -289,4 +289,12 @@ export const Juiz = {
     this._atualizarHUD();
     console.log("[Juiz] Estado resetado para novo jogo.");
   },
+
+tocarBGM() {
+    if (this.sfx) this.sfx.tocarBGM();
+  },
+
+  pararBGM() {
+    if (this.sfx) this.sfx.pararBGM();
+  }
 };
