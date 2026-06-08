@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+    <div id="cortina-transicao"></div>
     <div id="game">
 
         <div id="corte"></div>
@@ -27,7 +27,7 @@
                 <span class="hud-label" style="font-size:16px;">SCORE: </span>
                 <span id="hud-pontuacao">000000</span>
             </div>
-            
+
             <div id="hud-best-placar" class="score-container"
                 style="position:absolute; top:40px; right:20px; text-align:right;"> <span class="hud-label"
                     style="font-size:12px;">BEST: </span>
@@ -39,44 +39,52 @@
         <div id="tela-menu" class="tela-overlay">
             <h1 class="titulo-jogo">Vegetable<br>Samurai</h1>
             <p class="instrucao-pisca">Corte uma fruta para começar</p>
-            
+
             <div style="display: flex; gap: 50px; margin-top: 20px;">
-                
+
                 <div style="text-align: center;">
-                    <img src="assets/Vegetais_SVG/cebola_i.svg" id="botao-jogar" class="alvo-menu" style="width: 120px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
-                    <p style="color: white; font-weight: bold; margin-top: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">JOGAR</p>
+                    <img src="assets/Vegetais_SVG/cebola_i.svg" id="botao-jogar" class="alvo-menu"
+                        style="width: 120px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
+                    <p
+                        style="color: white; font-weight: bold; margin-top: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+                        JOGAR</p>
                 </div>
 
                 <div style="text-align: center;">
-                    <img src="assets/Vegetais_SVG/tomate_i.svg" id="botao-opcoes" class="alvo-menu" style="width: 120px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
-                    <p style="color: white; font-weight: bold; margin-top: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">OPÇÕES</p>
+                    <img src="assets/Vegetais_SVG/tomate_i.svg" id="botao-opcoes" class="alvo-menu"
+                        style="width: 120px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
+                    <p
+                        style="color: white; font-weight: bold; margin-top: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+                        OPÇÕES</p>
                 </div>
-                
+
             </div>
         </div>
 
         <div id="tela-gameover" class="tela-overlay" style="display: none;">
             <h1 class="titulo-gameover">FIM DE JOGO</h1>
-            
+
             <div class="caixa-pontuacao-final">
                 <span>Pontuação Final</span>
                 <h2 id="score-final">0</h2>
             </div>
-            
+
             <p class="instrucao-pisca">Corte a sua escolha</p>
-            
+
             <div style="display: flex; gap: 50px; margin-top: 20px;">
-                
+
                 <div style="text-align: center;">
-                    <img src="assets/Vegetais_SVG/batata_i.svg" id="botao-reiniciar" class="alvo-menu" style="width: 100px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
+                    <img src="assets/Vegetais_SVG/batata_i.svg" id="botao-reiniciar" class="alvo-menu"
+                        style="width: 100px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
                     <p style="color: white; font-weight: bold; margin-top: 10px;">REINICIAR</p>
                 </div>
 
                 <div style="text-align: center;">
-                    <img src="assets/Vegetais_SVG/cebola_i.svg" id="botao-voltar-menu" class="alvo-menu" style="width: 100px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
+                    <img src="assets/Vegetais_SVG/cebola_i.svg" id="botao-voltar-menu" class="alvo-menu"
+                        style="width: 100px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));">
                     <p style="color: white; font-weight: bold; margin-top: 10px;">MENU</p>
                 </div>
-                
+
             </div>
         </div>
 

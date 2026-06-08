@@ -36,44 +36,63 @@ export class MotorDoJogo {
   }
 
 mudarTela(novaTela) {
-    this.telaAtual = novaTela;
-    console.log(`Mudança de tela para -> ${this.telaAtual}`);
+    if (this.telaAtual === novaTela) return;
 
-    if (this.telaMenu)     this.telaMenu.style.display = "none";
-    if (this.telaGameOver) this.telaGameOver.style.display = "none";
+    const cortina = document.getElementById('cortina-transicao');
+    if (cortina) cortina.classList.add('ativa');
 
-    if (this.telaAtual === "jogando") {
-      this.jogoRodando = true;
+    this.jogoRodando = false; 
+    this.pararLoop();
 
-      // pra consolidar o restart do jogo, resetamos o estado geral aqui
-      ESTADO_DO_JOGO.vidas = 3;
-      ESTADO_DO_JOGO.pontuacao = 0;
+    // Espera a tela escurecer (500ms)
+    setTimeout(() => {
+      this.telaAtual = novaTela;
+      console.log(`Mudança de tela para -> ${this.telaAtual}`);
 
-      Juiz.resetar();
-
-      this.entidades.init();
-      this.spawner = new ControladorDeSpawn(this.entidades);
-      this.diretor = new DiretorDeJogo(this.spawner);
-      this.iniciarLoop();
-    } else {
-      this.jogoRodando = false; // Trava o jogo
-      this.pararLoop();
+      if (this.telaMenu) this.telaMenu.style.display = "none";
+      if (this.telaGameOver) this.telaGameOver.style.display = "none";
 
       if (this.telaAtual === "menu" && this.telaMenu) {
         this.telaMenu.style.display = "flex";
       } else if (this.telaAtual === "gameover" && this.telaGameOver) {
         this.telaGameOver.style.display = "flex";
       }
-    }
+
+      // SUA LÓGICA DE RESET RESTAURADA NO ESCURO DA CORTINA
+      if (this.telaAtual === "jogando") {
+        ESTADO_DO_JOGO.vidas = 3;
+        ESTADO_DO_JOGO.pontuacao = 0;
+        Juiz.resetar();
+        this.entidades.init();
+        this.spawner = new ControladorDeSpawn(this.entidades);
+        this.diretor = new DiretorDeJogo(this.spawner);
+      }
+
+      if (cortina) cortina.classList.remove('ativa');
+
+      // Espera a tela clarear (500ms) para começar a nascer as frutas
+      setTimeout(() => {
+        if (this.telaAtual === "jogando") {
+          this.jogoRodando = true;
+          this.iniciarLoop();
+        }
+      }, 500);
+
+    }, 500);
   }
 
   encerrarJogo(pontuacaoFinal) {
+    this.jogoRodando = false;
+    this.pararLoop();
+
     const textoScoreFinal = document.getElementById("score-final");
     if (textoScoreFinal) {
       textoScoreFinal.innerText = pontuacaoFinal;
     }
 
-    this.mudarTela("gameover");
+    setTimeout(() => {
+      this.mudarTela("gameover");
+    }, 1000);
   }
 
   iniciarLoop() {
