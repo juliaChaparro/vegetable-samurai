@@ -41,7 +41,7 @@ export class MotorDoJogo {
     const cortina = document.getElementById('cortina-transicao');
     if (cortina) cortina.classList.add('ativa');
 
-    this.jogoRodando = false; 
+    this.jogoRodando = false;
     this.pararLoop();
 
     // Espera a tela escurecer (500ms)
