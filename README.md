@@ -137,27 +137,27 @@ A divisão detalhada de cada issue resolvido por cada membro pode ser consultada
 
 Abaixo um resumo das áreas de atuação de cada integrante:
 
-### Membro 1 — Motor do Jogo e Interface
+### Victor Hugo — Motor do Jogo e Interface
 
 - Estrutura do `MotorDoJogo` (`game.js`): game loop, controle de telas, botões cortáveis
 - Telas de Menu e Game Over com navegação via lâmina
 - Diretor de Dificuldade (`diretor.js`): progressão automática de fases
 - Integração geral dos módulos e arquivo `main.js`
 
-### Membro 2 — Lâmina e Colisão
+### Julia Chaparro — Lâmina e Colisão
 
 - Sistema de rastro do mouse (`lamina.js`): trigonometria, animação e pool de divs
 - Detecção de colisão por interpolação linear (`colisao.js`)
 - Eventos de mouse (`mousedown`, `mousemove`, `mouseup`)
 
-### Membro 3 — Entidades e Física
+### Pedro Barreto — Entidades e Física
 
 - Classe base abstrata `EntidadeBase` com física parabólica e gravidade
 - Classes `Vegetal`, `Bomba` e `Madeira` com comportamentos específicos
 - Pool de entidades (`entidades.js`) e sistema de spawn (`spawner.js`)
 - Integração das entidades com o game loop
 
-### Membro 4 — Pontuação, Efeitos e Áudio
+### Carlos Henrique — Pontuação, Efeitos e Áudio
 
 - Objeto `Juiz` (`score.js`): HUD, pontuação, combos e Best Score com `localStorage`
 - Efeitos visuais (`particulas.js`): Split (metades ao cortar), Splash (partículas de suco) e Explosão (bomba)
