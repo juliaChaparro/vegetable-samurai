@@ -313,3 +313,31 @@ img {
 .alvo-menu:hover {
     filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)) brightness(1.2) !important;
 }
+
+/*Cortina de transição e trava de cliques*/
+#cortina-transicao {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1a1a1a;
+    z-index: 999999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#cortina-transicao.ativa {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#tela-gameover {
+    animation: travaClique 1s ease-in-out;
+}
+
+@keyframes travaClique {
+    0%, 99% { pointer-events: none; }
+    100% { pointer-events: all; }
+}
