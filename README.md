@@ -144,11 +144,14 @@ Abaixo um resumo das áreas de atuação de cada integrante:
 - Diretor de Dificuldade (`diretor.js`): progressão automática de fases
 - Integração geral dos módulos e arquivo `main.js`
 
-### Julia Chaparro — Lâmina e Colisão
+### Julia Chaparro — Lâmina, Colisão e Design
 
 - Sistema de rastro do mouse (`lamina.js`): trigonometria, animação e pool de divs
 - Detecção de colisão por interpolação linear (`colisao.js`)
 - Eventos de mouse (`mousedown`, `mousemove`, `mouseup`)
+- Criação dos designs e assets visuais dos vegetais (aplicados tanto no menu principal quanto durante o jogo).
+- Desenvolvimento dos elementos visuais da tela inicial.
+- Produção dos assets gráficos utilizados durante a jogabilidade.
 
 ### Pedro Barreto — Entidades e Física
 
