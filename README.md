@@ -64,7 +64,7 @@ git clone https://github.com/juliaChaparro/vegetable-samurai.git
 **2. Acesse a pasta do projeto**
 
 ```bash
-cd vegetable-samurai
+cd vegetable-samurai/game
 ```
 
 > O projeto deve ser clonado a partir da branch `main`.
