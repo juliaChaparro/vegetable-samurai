@@ -212,21 +212,37 @@ export const Juiz = {
     }
   },
 
-  /**
+/**
    * @private
    */
   _renderizarVidas() {
-    this.elVidas.innerHTML = "";
+    // 1. Se for a primeira vez (DOM vazio), cria as 3 tags <img> fixas
+    if (this.elVidas.children.length === 0) {
+      for (let i = 0; i < 3; i++) {
+        const icone = document.createElement("img");
+        icone.className = "hud-vida-icone";
+        this.elVidas.appendChild(icone);
+      }
+    }
+
+    // 2. Agora só varre as tags existentes e atualiza o SRC, sem destruir o DOM!
+    const icones = this.elVidas.children;
     for (let i = 0; i < 3; i++) {
-      const icone = document.createElement("img");
-      icone.className = "hud-vida-icone";
-      icone.src =
-        i < ESTADO_DO_JOGO.vidas
-          ? "assets/Moeda_vida.svg"
-          : "assets/Moeda_vida_perdida.svg";
-      icone.alt = i < ESTADO_DO_JOGO.vidas ? "vida" : "vida perdida";
-      if (i >= ESTADO_DO_JOGO.vidas) icone.classList.add("vida-perdida");
-      this.elVidas.appendChild(icone);
+      const icone = icones[i];
+      const deveEstarCheia = i < ESTADO_DO_JOGO.vidas;
+      const novoSrc = deveEstarCheia ? "assets/Moeda_vida.svg" : "assets/Moeda_vida_perdida.svg";
+
+      // Só altera a imagem no navegador SE a vida realmente tiver mudado neste frame
+      if (!icone.src.includes(novoSrc)) {
+        icone.src = novoSrc;
+        icone.alt = deveEstarCheia ? "vida" : "vida perdida";
+        
+        if (deveEstarCheia) {
+          icone.classList.remove("vida-perdida");
+        } else {
+          icone.classList.add("vida-perdida");
+        }
+      }
     }
   },
 
