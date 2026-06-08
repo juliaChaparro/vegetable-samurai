@@ -100,31 +100,34 @@ http://127.0.0.1:8080/?debug
 
 ```
 vegetable-samurai/
-├── index.html              # Estrutura principal e HUD
-├── css/
-│   └── style.css           # Estilos, animações e variáveis visuais
-├── js/
-│   ├── main.js             # Ponto de entrada — inicializa todos os módulos
-│   ├── config.js           # Estado global do jogo (pontuação, vidas)
-│   ├── entidadeBase.js     # Classe base abstrata para todos os objetos do jogo
-│   ├── vegetal.js          # Classe dos vegetais cortáveis
-│   ├── bomba.js            # Classe da bomba (obstáculo letal)
-│   ├── madeira.js          # Classe da madeira (zera combo)
-│   ├── entidades.js        # Pool de entidades (object pooling)
-│   ├── spawner.js          # Controlador de spawn (lançamentos)
-│   ├── diretor.js          # Diretor de dificuldade progressiva
-│   ├── lamina.js           # Lâmina do mouse (rastro + trigonometria)
-│   ├── colisao.js          # Detecção de colisão lâmina × entidade
-│   ├── game.js             # Motor do jogo (game loop, telas, botões)
-│   ├── score.js            # Juiz (pontuação, HUD, combos, best score)
-│   ├── particulas.js       # Efeitos visuais (split, splash, explosão)
-│   └── sfx.js              # Gerenciador de efeitos sonoros
-└── assets/
-    ├── background/         # Imagens de fundo e botões SVG
-    ├── Vegetais_SVG/       # Sprites dos vegetais (inteiros e metades)
-    ├── sfx/                # Efeitos sonoros (.mp3)
-    ├── Moeda_vida.svg      # Ícone de vida ativa
-    └── Moeda_vida_perdida.svg
+├── package.json                # Configuração do Node e gerenciamento de pacotes
+├── README.md                   # Documentação oficial do projeto
+└── game/                       # Pasta isolada contendo o jogo final
+    ├── index.html              # Estrutura principal e HUD
+    ├── css/
+    │   └── style.css           # Estilos, animações e variáveis visuais
+    ├── js/
+    │   ├── main.js             # Ponto de entrada — inicializa todos os módulos
+    │   ├── config.js           # Estado global do jogo (pontuação, vidas)
+    │   ├── entidadeBase.js     # Classe base abstrata para todos os objetos do jogo
+    │   ├── vegetal.js          # Classe dos vegetais cortáveis
+    │   ├── bomba.js            # Classe da bomba (obstáculo letal)
+    │   ├── madeira.js          # Classe da madeira (zera combo)
+    │   ├── entidades.js        # Pool de entidades (object pooling)
+    │   ├── spawner.js          # Controlador de spawn (lançamentos)
+    │   ├── diretor.js          # Diretor de dificuldade progressiva
+    │   ├── lamina.js           # Lâmina do mouse (rastro + trigonometria)
+    │   ├── colisao.js          # Detecção de colisão lâmina × entidade
+    │   ├── game.js             # Motor do jogo (game loop, telas, botões)
+    │   ├── score.js            # Juiz (pontuação, HUD, combos, best score)
+    │   ├── particulas.js       # Efeitos visuais (split, splash, explosão)
+    │   └── sfx.js              # Gerenciador de efeitos sonoros
+    └── assets/
+        ├── background/         # Imagens de fundo e botões SVG
+        ├── Vegetais_SVG/       # Sprites dos vegetais (inteiros e metades)
+        ├── sfx/                # Efeitos sonoros (.mp3)
+        ├── Moeda_vida.svg      # Ícone de vida ativa
+        └── Moeda_vida_perdida.svg
 ```
 
 ---
