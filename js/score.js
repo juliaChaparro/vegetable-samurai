@@ -54,6 +54,11 @@ export const Juiz = {
     console.log("[Juiz] Inicializado. HUD pronto.");
   },
 
+
+  tocarSom(nome) {
+    if (this.sfx) this.sfx.tocar(nome);
+  },
+  
   // ── Ponto de entrada: vegetal cortado ─────────────────────
 
   /**
@@ -155,6 +160,7 @@ export const Juiz = {
       ESTADO_DO_JOGO.vidas--;
     }
 
+    this.sfx.tocar("falha");
     this._atualizarHUD();
     this._salvarBestScore();
     console.log(`[Juiz] Fruta perdida. Vidas: ${ESTADO_DO_JOGO.vidas}`);

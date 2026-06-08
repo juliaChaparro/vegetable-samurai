@@ -11,6 +11,9 @@ export class GerenciadorDeSFX {
       corte: null,
       bomba: null,
       combo: null,
+      arremessar: null,
+      madeira: null,
+      falha: null,
     };
   }
 
@@ -24,6 +27,9 @@ export class GerenciadorDeSFX {
       corte: "corte.mp3",
       bomba: "bomba.mp3",
       combo: "combo.mp3",
+      arremessar: "arremessar.mp3",
+      madeira: "madeira.mp3",
+      falha: "falha.mp3",
     };
 
     for (const [chave, arquivo] of Object.entries(arquivos)) {

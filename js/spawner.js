@@ -1,5 +1,6 @@
 import { EntidadesDoJogo } from './entidades.js';
 import { Utils } from './utils.js';
+import { Juiz } from './score.js';
 
 export class ControladorDeSpawn {
     constructor(entidades) {
@@ -23,6 +24,8 @@ export class ControladorDeSpawn {
         
         entidade.spawn(posX, posY);
         entidade.arremessar(angulo, Utils.randomFloatExclusivo(700, 900));
+
+        Juiz.tocarSom("arremessar");
         console.log(`Spawnado ${entidade.name} na posição (${posX}, ${posY})`);
     }
 
@@ -56,7 +59,7 @@ export class ControladorDeSpawn {
             entidade.spawn(posX, posY);
             entidade.arremessar(angulo, forca);
         }
-
+        Juiz.tocarSom("arremessar");    
         console.log(`Lançada sequência de ${quantidade} itens da categoria: ${categoria}!`);
     }
 
@@ -84,6 +87,8 @@ export class ControladorDeSpawn {
 
         entidade1.arremessar(angulo1, Utils.randomFloatExclusivo(700, 900));
         entidade2.arremessar(angulo2, Utils.randomFloatExclusivo(700, 900));
+
+        Juiz.tocarSom("arremessar");
         console.log(`Lançadas entidades espelhadas nas posições (${posX1}, ${posY}) e (${posX2}, ${posY})`);
     }
 }

@@ -22,6 +22,7 @@ export class Madeira extends EntidadeBase {
 
     if (tipo === "corte") {
       console.log(`🪵 TOC! Você cortou a ${this.name}! COMBO ZERADO!`);
+      Juiz.tocarSom("madeira");
       Juiz.zerarCombo();
     }
   }
