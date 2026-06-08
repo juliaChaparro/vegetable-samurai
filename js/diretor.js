@@ -39,7 +39,7 @@ export class DiretorDeJogo {
         // Fases: 0-CALMA | 1-AQUECIMENTO | 2-PRESSÃO | 3-FRENESI | 4-INFERNO
         this._limitesFase = [0, 20, 45, 75, 110];
 
-        console.log('[Diretor] Inicializado. Partida começa na Fase 0 — Calma.');
+        // console.log('[Diretor] Inicializado. Partida começa na Fase 0 — Calma.');
     }
 
     // ── Loop principal ─────────────────────────────────────────
@@ -97,10 +97,10 @@ export class DiretorDeJogo {
         this.chanceDePerigo  = config.perigo;
 
         const nomes = ['Calma', 'Aquecimento', 'Pressão', 'Frenesi', 'Inferno'];
-        console.log(
-            `[Diretor] ⚡ FASE ${this.fase} — ${nomes[this.fase]} ` +
-            `| cooldown=${config.cooldown}s | combo=${config.combo} | perigo=${(config.perigo * 100).toFixed(0)}%`
-        );
+        // console.log(
+        //     `[Diretor] ⚡ FASE ${this.fase} — ${nomes[this.fase]} ` +
+        //     `| cooldown=${config.cooldown}s | combo=${config.combo} | perigo=${(config.perigo * 100).toFixed(0)}%`
+        // );
     }
 
     /**

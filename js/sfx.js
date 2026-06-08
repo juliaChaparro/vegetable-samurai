@@ -37,7 +37,7 @@ export class GerenciadorDeSFX {
     this.bgm.loop = true;
     this.bgm.volume = 0; // Começa mutado para o fade-in
 
-    console.log("[SFX] Áudios carregados.");
+    // console.log("[SFX] Áudios carregados.");
   }
 
   tocar(nome) {

@@ -43,7 +43,7 @@ export class Colisao {
         if (colidiu) {
           obj.cortado = true;
           obj.despawn("corte"); // Vegetal, Bomba ou Madeira tratam cada um do seu lado
-          console.log("[Colisao] Atingido:", obj.name);
+          // console.log("[Colisao] Atingido:", obj.name);
           break; // evita detectar a mesma entidade múltiplas vezes no mesmo rastro
         }
       }

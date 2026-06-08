@@ -51,7 +51,7 @@ export class EntidadeBase {
      * @param {number} positionY 
      */
     spawn(positionX, positionY) {
-        console.log(`Spawnando ${this.name} na posição (${positionX}, ${positionY})`);
+        // console.log(`Spawnando ${this.name} na posição (${positionX}, ${positionY})`);
         this.positionX = positionX;
         this.positionY = positionY;
         this.rotation = 0;
@@ -77,12 +77,12 @@ export class EntidadeBase {
     despawn(tipo = 'normal') {
         this.ativo = false;
         this.sprite.style.display = 'none';
-        if (tipo === 'normal') {
-            console.log(`Despawnando ${this.name} na posição (${this.positionX}, ${this.positionY})`);
-        } else {
-            //Adicionar depois função de emitir partículas.
-            console.log(`Soltando Pedaços!!`);
-        }
+        // if (tipo === 'normal') {
+        //     // console.log(`Despawnando ${this.name} na posição (${this.positionX}, ${this.positionY})`);
+        // } else {
+        //     //Adicionar depois função de emitir partículas.
+        //     // console.log(`Soltando Pedaços!!`);
+        // }
     }
 
     /**

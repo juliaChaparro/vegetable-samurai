@@ -51,7 +51,7 @@ export const Juiz = {
     });
 
     this._atualizarHUD();
-    console.log("[Juiz] Inicializado. HUD pronto.");
+    // console.log("[Juiz] Inicializado. HUD pronto.");
   },
 
 
@@ -101,9 +101,9 @@ export const Juiz = {
     this._atualizarHUD();
     this._salvarBestScore();
 
-    console.log(
-      `[Juiz] ${entidade.name} cortado! +${pontos} pts | Combo: ${this.comboAtual}x`,
-    );
+    // console.log(
+    //   `[Juiz] ${entidade.name} cortado! +${pontos} pts | Combo: ${this.comboAtual}x`,
+    // );
   },
 
   // ── Bomba ──────────────────────────────────────────────────
@@ -129,7 +129,7 @@ export const Juiz = {
     this._atualizarHUD();
     this._salvarBestScore();
 
-    console.warn("[Juiz] BOMBA cortada! Game Over.");
+    // console.warn("[Juiz] BOMBA cortada! Game Over.");
     // MotorDoJogo escuta 'bombaExplodiu' e chama encerrarJogo()
   },
 
@@ -143,7 +143,7 @@ export const Juiz = {
     this.comboAtual = 0;
     this.tempoUltimoCorte = 0;
     this._mostrarComboFeedback(0, 0); // apaga o feedback visual
-    console.log("[Juiz] Combo zerado pela madeira.");
+    // console.log("[Juiz] Combo zerado pela madeira.");
   },
 
   // ── Fruta perdida ──────────────────────────────────────────
@@ -163,7 +163,7 @@ export const Juiz = {
     this.sfx.tocar("falha");
     this._atualizarHUD();
     this._salvarBestScore();
-    console.log(`[Juiz] Fruta perdida. Vidas: ${ESTADO_DO_JOGO.vidas}`);
+    // console.log(`[Juiz] Fruta perdida. Vidas: ${ESTADO_DO_JOGO.vidas}`);
   },
 
   // ── Tabela de pontos ───────────────────────────────────────
@@ -287,7 +287,7 @@ export const Juiz = {
         "vegetable_samurai_best",
         String(ESTADO_DO_JOGO.melhorPontuacao),
       );
-      console.log(`[Juiz] Novo Best Score: ${ESTADO_DO_JOGO.melhorPontuacao}`);
+      // console.log(`[Juiz] Novo Best Score: ${ESTADO_DO_JOGO.melhorPontuacao}`);
     }
   },
 
@@ -303,7 +303,7 @@ export const Juiz = {
     ESTADO_DO_JOGO.pontuacao = 0;
     ESTADO_DO_JOGO.vidas = 3;
     this._atualizarHUD();
-    console.log("[Juiz] Estado resetado para novo jogo.");
+    // console.log("[Juiz] Estado resetado para novo jogo.");
   },
 
 tocarBGM() {

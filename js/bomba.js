@@ -26,15 +26,12 @@ export class Bomba extends EntidadeBase {
     super.despawn(tipo);
 
     if (tipo === "corte") {
-      console.log(`💥 KABOOM! Você cortou a ${this.name}! GAME OVER!`);
       // Passa as coordenadas no detail para o Juiz criar a explosão no lugar certo
       window.dispatchEvent(
         new CustomEvent("bombaExplodiu", {
           detail: { cx, cy },
         }),
       );
-    } else {
-      console.log(`✅ A ${this.name} caiu sem explodir.`);
     }
   }
 }

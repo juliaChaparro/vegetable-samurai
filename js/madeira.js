@@ -21,7 +21,7 @@ export class Madeira extends EntidadeBase {
     super.despawn(tipo);
 
     if (tipo === "corte") {
-      console.log(`🪵 TOC! Você cortou a ${this.name}! COMBO ZERADO!`);
+      // console.log(`🪵 TOC! Você cortou a ${this.name}! COMBO ZERADO!`);
       Juiz.tocarSom("madeira");
       Juiz.zerarCombo();
     }

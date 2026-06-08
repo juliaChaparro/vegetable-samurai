@@ -26,7 +26,7 @@ export class ControladorDeSpawn {
         entidade.arremessar(angulo, Utils.randomFloatExclusivo(700, 900));
 
         Juiz.tocarSom("arremessar");
-        console.log(`Spawnado ${entidade.name} na posição (${posX}, ${posY})`);
+        // console.log(`Spawnado ${entidade.name} na posição (${posX}, ${posY})`);
     }
 
     lancarEntidadeSequencia(quantidade, categoria = 'vegetal') {
@@ -60,7 +60,7 @@ export class ControladorDeSpawn {
             entidade.arremessar(angulo, forca);
         }
         Juiz.tocarSom("arremessar");    
-        console.log(`Lançada sequência de ${quantidade} itens da categoria: ${categoria}!`);
+        // console.log(`Lançada sequência de ${quantidade} itens da categoria: ${categoria}!`);
     }
 
     lancarEntidadeEspelhada(categoria = 'vegetal') {
@@ -89,6 +89,6 @@ export class ControladorDeSpawn {
         entidade2.arremessar(angulo2, Utils.randomFloatExclusivo(700, 900));
 
         Juiz.tocarSom("arremessar");
-        console.log(`Lançadas entidades espelhadas nas posições (${posX1}, ${posY}) e (${posX2}, ${posY})`);
+        // console.log(`Lançadas entidades espelhadas nas posições (${posX1}, ${posY}) e (${posX2}, ${posY})`);
     }
 }

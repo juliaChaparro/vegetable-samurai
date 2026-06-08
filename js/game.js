@@ -24,7 +24,7 @@ export class MotorDoJogo {
   }
 
   inicializar() {
-    console.log("Inicializado!");
+    // console.log("Inicializado!");
 
     window.addEventListener("bombaExplodiu", () => {
       this.encerrarJogo(ESTADO_DO_JOGO.pontuacao);
@@ -47,7 +47,7 @@ export class MotorDoJogo {
     // Espera a tela escurecer (500ms)
     setTimeout(() => {
       this.telaAtual = novaTela;
-      console.log(`Mudança de tela para -> ${this.telaAtual}`);
+      // console.log(`Mudança de tela para -> ${this.telaAtual}`);
 
       if (this.telaMenu) this.telaMenu.style.display = "none";
       if (this.telaGameOver) this.telaGameOver.style.display = "none";
@@ -140,7 +140,7 @@ export class MotorDoJogo {
     if (this.loopId) {
       cancelAnimationFrame(this.loopId);
       this.loopId = null;
-      console.log("Loop pausado/parado.");
+      // console.log("Loop pausado/parado.");
     }
   }
 
@@ -160,7 +160,7 @@ export class MotorDoJogo {
       e.sprite.style.display = "none";
       if (e.sprite.parentNode) e.sprite.parentNode.removeChild(e.sprite);
     });
-    console.log("[Motor] Entidades limpas do DOM.");
+    // console.log("[Motor] Entidades limpas do DOM.");
   }
 
   vincularBotoesAoCorte() {
@@ -189,13 +189,13 @@ export class MotorDoJogo {
         despawn: (tipo) => {
           if (tipo === "corte") {
             el.entidadeReferencia.cortado = true; // Impede ser fatiado 50x no mesmo milissegundo
-            console.log(`💥 Botão cortado: ${btn.id}`);
+            // console.log(`💥 Botão cortado: ${btn.id}`);
 
             // Executa a transição de tela
             if (btn.acao === "jogar") this.mudarTela("jogando");
             else if (btn.acao === "menu") this.mudarTela("menu");
             else if (btn.acao === "opcoes")
-              console.log("Opções: Em desenvolvimento!");
+              // console.log("Opções: Em desenvolvimento!");
 
             // Reseta o botão meio segundo depois para futuras interações
             setTimeout(() => {

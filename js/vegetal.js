@@ -30,10 +30,10 @@ export class Vegetal extends EntidadeBase {
     super.despawn(tipo);
 
     if (tipo === "corte") {
-      console.log(`🍉 SUCO DE ${this.name.toUpperCase()}!`);
+      // console.log(`🍉 SUCO DE ${this.name.toUpperCase()}!`);
       Juiz.vegetalFoiCortado(this, cx, cy);
     } else {
-      console.log(`❌ ${this.name} caiu no chão!`);
+      // console.log(`❌ ${this.name} caiu no chão!`);
       Juiz.registrarFrutaPerdida();
     }
   }
