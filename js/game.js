@@ -1,9 +1,9 @@
-import { Juiz } from './score.js';
+import { Juiz } from "./score.js";
 import { EntidadesDoJogo } from "./entidades.js";
 import { ControladorDeSpawn } from "./spawner.js";
 import { Utils } from "./utils.js";
-import { DiretorDeJogo } from './diretor.js';
-import { ESTADO_DO_JOGO } from './config.js';
+import { DiretorDeJogo } from "./diretor.js";
+import { ESTADO_DO_JOGO } from "./config.js";
 
 export class MotorDoJogo {
   constructor() {
@@ -27,7 +27,7 @@ export class MotorDoJogo {
     console.log("Inicializado!");
 
     window.addEventListener("bombaExplodiu", () => {
-      this.encerrarJogo(0); 
+      this.encerrarJogo(ESTADO_DO_JOGO.pontuacao);
     });
 
     this.vincularBotoesAoCorte();
@@ -35,7 +35,7 @@ export class MotorDoJogo {
     this.mudarTela("menu");
   }
 
-mudarTela(novaTela) {
+  mudarTela(novaTela) {
     if (this.telaAtual === novaTela) return;
 
     const cortina = document.getElementById('cortina-transicao');
@@ -58,11 +58,15 @@ mudarTela(novaTela) {
         this.telaGameOver.style.display = "flex";
       }
 
-      // SUA LÓGICA DE RESET RESTAURADA NO ESCURO DA CORTINA
+      // LÓGICA CONSOLIDADA DE RESET DO JOGO
       if (this.telaAtual === "jogando") {
         ESTADO_DO_JOGO.vidas = 3;
         ESTADO_DO_JOGO.pontuacao = 0;
         Juiz.resetar();
+
+        // Limpa todas as entidades ativas do DOM antes de criar novas (Mudança do parceiro)
+        this._limparEntidades();
+        this.entidades = new EntidadesDoJogo();
         this.entidades.init();
         this.spawner = new ControladorDeSpawn(this.entidades);
         this.diretor = new DiretorDeJogo(this.spawner);
@@ -104,8 +108,8 @@ mudarTela(novaTela) {
       if (!this.jogoRodando) return;
 
       if (ESTADO_DO_JOGO.vidas <= 0) {
-          this.encerrarJogo(ESTADO_DO_JOGO.pontuacao || 0);
-          return; // Para o frame imediatamente
+        this.encerrarJogo(ESTADO_DO_JOGO.pontuacao || 0);
+        return; // Para o frame imediatamente
       }
 
       const agora = Date.now();
@@ -134,42 +138,66 @@ mudarTela(novaTela) {
     }
   }
 
+  /**
+   * @brief Despawna todas as entidades ativas e remove seus sprites do DOM.
+   * Chamado antes de iniciar um novo jogo para garantir tela limpa.
+   * @private
+   */
+  _limparEntidades() {
+    if (!this.entidades) return;
+    const todas = [
+      ...this.entidades.vegetaisdoJogo,
+      ...this.entidades.obstaculosdoJogo,
+    ];
+    todas.forEach((e) => {
+      e.ativo = false;
+      e.sprite.style.display = "none";
+      if (e.sprite.parentNode) e.sprite.parentNode.removeChild(e.sprite);
+    });
+    console.log("[Motor] Entidades limpas do DOM.");
+  }
+
   vincularBotoesAoCorte() {
     const botoesConfig = [
-        { id: 'botao-jogar', acao: 'jogar' },
-        { id: 'botao-opcoes', acao: 'opcoes' },
-        { id: 'botao-reiniciar', acao: 'jogar' }, // Reaproveita a lógica de iniciar o jogo
-        { id: 'botao-voltar-menu', acao: 'menu' }
+      { id: "botao-jogar", acao: "jogar" },
+      { id: "botao-opcoes", acao: "opcoes" },
+      { id: "botao-reiniciar", acao: "jogar" }, // Reaproveita a lógica de iniciar o jogo
+      { id: "botao-voltar-menu", acao: "menu" },
     ];
 
-    botoesConfig.forEach(btn => {
-        const el = document.getElementById(btn.id);
-        if (!el) return;
+    botoesConfig.forEach((btn) => {
+      const el = document.getElementById(btn.id);
+      if (!el) return;
 
-        // 1. Damos a ele a classe que o colisao.js procura
-        el.classList.add("entidadeDoJogo");
+      // 1. Damos a ele a classe que o colisao.js procura
+      el.classList.add("entidadeDoJogo");
 
-        // 2. Criamos o objeto que simula uma EntidadeBase
-        el.entidadeReferencia = {
-            // Um 'getter' dinâmico: o botão só fica "ativo" se estiver visível na tela
-            get ativo() { return el.offsetParent !== null; },
-            cortado: false,
-            name: `Botão: ${btn.id}`,
-            despawn: (tipo) => {
-                if (tipo === 'corte') {
-                    el.entidadeReferencia.cortado = true; // Impede ser fatiado 50x no mesmo milissegundo
-                    console.log(`💥 Botão cortado: ${btn.id}`);
-                    
-                    // Executa a transição de tela
-                    if (btn.acao === 'jogar') this.mudarTela('jogando');
-                    else if (btn.acao === 'menu') this.mudarTela('menu');
-                    else if (btn.acao === 'opcoes') console.log("Opções: Em desenvolvimento!");
+      // 2. Criamos o objeto que simula uma EntidadeBase
+      el.entidadeReferencia = {
+        // Um 'getter' dinâmico: o botão só fica "ativo" se estiver visível na tela
+        get ativo() {
+          return el.offsetParent !== null;
+        },
+        cortado: false,
+        name: `Botão: ${btn.id}`,
+        despawn: (tipo) => {
+          if (tipo === "corte") {
+            el.entidadeReferencia.cortado = true; // Impede ser fatiado 50x no mesmo milissegundo
+            console.log(`💥 Botão cortado: ${btn.id}`);
 
-                    // Reseta o botão meio segundo depois para futuras interações
-                    setTimeout(() => { el.entidadeReferencia.cortado = false; }, 500);
-                }
-            }
-        };
+            // Executa a transição de tela
+            if (btn.acao === "jogar") this.mudarTela("jogando");
+            else if (btn.acao === "menu") this.mudarTela("menu");
+            else if (btn.acao === "opcoes")
+              console.log("Opções: Em desenvolvimento!");
+
+            // Reseta o botão meio segundo depois para futuras interações
+            setTimeout(() => {
+              el.entidadeReferencia.cortado = false;
+            }, 500);
+          }
+        },
+      };
     });
-}
+  }
 }
