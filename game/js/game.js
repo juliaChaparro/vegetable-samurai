@@ -194,8 +194,7 @@ export class MotorDoJogo {
             // Executa a transição de tela
             if (btn.acao === "jogar") this.mudarTela("jogando");
             else if (btn.acao === "menu") this.mudarTela("menu");
-            else if (btn.acao === "opcoes")
-              // console.log("Opções: Em desenvolvimento!");
+            else if (btn.acao === "opcoes") console.log("Opções: Em desenvolvimento!");
 
             // Reseta o botão meio segundo depois para futuras interações
             setTimeout(() => {
