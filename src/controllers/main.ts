@@ -17,28 +17,26 @@ const bemvindo = (req: Request, res: Response) => {
 }
 
 const hb1 = (req: Request, res: Response) => {
-  const message = "Seja bem-vindo(a) ao IComp";
+  const message = "Olá, você está aprendendo Express + HBS";
   res.render("main/hb1", {
     message,
   });
 }
 
 const hb2  = (req: Request, res: Response) => {
-  const message = "Seja bem-vindo(a) ao IComp";
+  const message = "Express Framework";
   res.render("main/hb2", {
     message,
-    ehBemVindo: true,
+    mostrarMsg: true,
   });
 }
 
 const hb3 = (req: Request, res: Response) => {
-  const profs: Prof[] = [
-    { nome: "Edleno Moura", sala: 1236 },
-    { nome: "Eduardo Feitosa", sala: 1234 },
-    { nome: "Elaine Harada", sala: 1274 },
-  ];
+  const message = "Algumas plantas do amazonas:";
+  const plantas = ["Vitória-régia", "Seringueira", "Guaraná"];
   res.render("main/hb3", {
-    profs,
+    message,
+    plantas,
   });
 }
 
