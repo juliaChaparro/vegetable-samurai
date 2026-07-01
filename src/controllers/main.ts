@@ -1,5 +1,5 @@
 import { type Request, type Response } from "express"
-import { type Prof } from "../views/helpers/helpers.js";
+import { type Prof, type Technology } from "../views/helpers/helpers.js";
 
 const index = (req: Request, res: Response) => {
   res.json({
@@ -41,13 +41,17 @@ const hb3 = (req: Request, res: Response) => {
 }
 
 const hb4 = (req: Request, res: Response) => {
-  const profs: Prof[] = [
-    { nome: "Edleno Moura", sala: 1236 },
-    { nome: "Eduardo Feitosa", sala: 1234 },
-    { nome: "Elaine Harada", sala: 1274 },
+  const technologies: Technology[] = [
+    { name: 'Express', type: 'Framework', poweredByNodejs: true },
+    { name: 'Laravel', type: 'Framework', poweredByNodejs: false },
+    { name: 'React', type: 'Library', poweredByNodejs: true },
+    { name: 'Handlebars', type: 'Engine View', poweredByNodejs: true },
+    { name: 'Django', type: 'Framework', poweredByNodejs: false },
+    { name: 'Docker', type: 'Virtualization', poweredByNodejs: false },
+    { name: 'Sequelize', type: 'ORM tool', poweredByNodejs: true },
   ];
   res.render("main/hb4", {
-    profs,
+    technologies,
   });
 }
 
