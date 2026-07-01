@@ -1,5 +1,6 @@
 import { type Request, type Response } from "express"
 import { type Prof } from "../views/helpers/helpers.js";
+import { loremIpsum } from "lorem-ipsum";
 
 const index = (req: Request, res: Response) => {
   res.json({
@@ -52,6 +53,31 @@ const hb4 = (req: Request, res: Response) => {
     profs,
   });
 }
+const lorem = (req: Request, res: Response) => {
+  const quantidadeParam = typeof req.params.quantidade === "string" ? req.params.quantidade : "";
+  const quantidade = parseInt(quantidadeParam, 10);
+  if (isNaN(quantidade) || quantidade <= 0) {
+    res.status(400).send("Parâmetro inválido. Por favor, forneça um número inteiro positivo.");
+    return;
+  }
+
+  const generatedText = loremIpsum({
+    count: quantidade,
+    units: "paragraphs",
+    format: "plain",
+  });
+
+  // Dividimos o texto por quebras de linha para obter o array de parágrafos
+  const paragraphs = generatedText.split(/\r?\n/).filter(p => p.trim() !== "");
+
+  const textParagrafos = quantidade === 1 ? "parágrafo" : "parágrafos";
+  const title = `Gerador de Lorem Ipsum (${quantidade} ${textParagrafos})`;
+
+  res.render("main/lorem", {
+    title,
+    paragraphs,
+  });
+}
 
 export default {
     index,
@@ -60,5 +86,6 @@ export default {
     hb1,
     hb2,
     hb3,
-    hb4
+    hb4,
+    lorem
 }
