@@ -4,6 +4,7 @@ import helpers from "./views/helpers/helpers.js";
 
 import validateEnv from "./utils/validateEnv.js";
 import logger from "./middlewares/logger.js";
+import morgan from "morgan";
 import router from "./router/router.js";
 
 const env = validateEnv();
@@ -19,6 +20,7 @@ app.engine(
 app.set("view engine", "handlebars");
 app.set("views", `${process.cwd()}/src/views`);
 
+app.use(morgan("short"));
 app.use(logger("complete"));
 
 app.use("/img", express.static(`${process.cwd()}/public/img`));
