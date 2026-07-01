@@ -1,4 +1,5 @@
 import { Router } from "../router/router";
+import { Routes } from "../router/routes";
 
 export class MainController {
 
@@ -9,7 +10,7 @@ export class MainController {
     }
 
     public start() {
-        this.router.navigate("menu");
+        this.router.navigate(Routes.MENU);
     }
 
 }
