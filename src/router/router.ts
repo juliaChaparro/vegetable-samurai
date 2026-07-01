@@ -1,26 +1,14 @@
 import { Router } from "express";
-import { LoremIpsum } from "lorem-ipsum";
+import mainController from "../controllers/main.js"
 
 const router = Router();
 
-const lorem = new LoremIpsum();
-
-router.get("/lorem/:numero", (req, res) => {
-
-    const numero = Number(req.params.numero);
-
-    if (isNaN(numero) || numero < 1) {
-        return res.status(400).send("Número inválido");
-    }
-
-    let html = "";
-
-    for (let i = 0; i < numero; i++) {
-        html += `<p>${lorem.generateParagraphs(1)}</p>`;
-    }
-
-    res.send(html);
-
-});
+router.get("/", mainController.index);
+router.get("/about", mainController.about);
+router.get("/bem-vindo/:nome/:sobrenome", mainController.bemvindo);
+router.get("/hb1", mainController.hb1);
+router.get("/hb2", mainController.hb2);
+router.get("/hb3", mainController.hb3);
+router.get("/hb4", mainController.hb4);
 
 export default router;
