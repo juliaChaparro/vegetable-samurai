@@ -1,28 +1,26 @@
-import { Routes } from "./routes";
+import { Router } from "express";
+import { LoremIpsum } from "lorem-ipsum";
 
-export class Router {
+const router = Router();
 
-    public navigate(route: Routes) {
+const lorem = new LoremIpsum();
 
-        switch(route){
+router.get("/lorem/:numero", (req, res) => {
 
-            case Routes.MENU:
-                console.log("Menu");
-                break;
+    const numero = Number(req.params.numero);
 
-            case Routes.GAME:
-                console.log("Jogo");
-                break;
-
-            case Routes.OPTIONS:
-                console.log("Opções");
-                break;
-
-            case Routes.GAMEOVER:
-                console.log("Game Over");
-                break;
-        }
-
+    if (isNaN(numero) || numero < 1) {
+        return res.status(400).send("Número inválido");
     }
 
-}
+    let html = "";
+
+    for (let i = 0; i < numero; i++) {
+        html += `<p>${lorem.generateParagraphs(1)}</p>`;
+    }
+
+    res.send(html);
+
+});
+
+export default router;
