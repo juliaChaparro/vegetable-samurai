@@ -6,6 +6,15 @@ import validateEnv from "./utils/validateEnv.js";
 import logger from "./middlewares/logger.js";
 import morgan from "morgan";
 import router from "./router/router.js";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+import { v4 as uuidv4 } from "uuid";
+
+declare module "express-session" {
+  interface SessionData {
+    uid: string;
+  }
+}
 
 const env = validateEnv();
 const PORT = env.PORT;
@@ -22,6 +31,28 @@ app.set("views", `${process.cwd()}/src/views`);
 
 app.use(morgan("short"));
 app.use(logger("complete"));
+
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(
+  session({
+    name: "sid",
+    genid: () => uuidv4(),
+    secret: process.env.SECRET || "secret_padrao_seguro",
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: {
+      httpOnly: true,
+      maxAge: 2 * 60 * 60 * 1000,
+    },
+  })
+);
+
+app.use((req, res, next) => {
+  res.locals.logado = !!req.session?.uid;
+  next();
+});
 
 app.use("/img", express.static(`${process.cwd()}/public/img`));
 app.use("/css", [
