@@ -1,6 +1,9 @@
+// =============================================================
+// UserService.ts — Cadastro de usuários com bcryptjs
+// =============================================================
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import type { ICreateUserDTO } from "../interfaces/userInterface.js";
+import type { ICreateUserDTO } from "../interfaces/majorInterface.js";
 
 const prisma = new PrismaClient();
 

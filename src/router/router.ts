@@ -1,6 +1,7 @@
 import { Router } from "express";
 import mainController from "../controllers/main.js";
 import MajorController from "../controllers/MajorController.js";
+import UserController from "../controllers/UserController.js";
 
 const router = Router();
 
@@ -20,5 +21,9 @@ router.post("/major", MajorController.store);
 router.get("/major/:id/edit", MajorController.edit);
 router.post("/major/:id/update", MajorController.update);
 router.post("/major/remove/:id", MajorController.destroy);
+
+// ── Cadastro de usuários ───────────────────────
+router.get("/user/register", UserController.create);
+router.post("/user/register", UserController.store);
 
 export default router;

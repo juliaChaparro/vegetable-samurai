@@ -1,8 +1,64 @@
-<select name="majorId" class="form-select" required>
-  <option value="">Selecione um curso</option>
-  {{#each majors}}
-    <option value="{{this.id}}" {{#if (eq this.id ../majorId)}}selected{{/if}}>
-      {{this.name}} ({{this.code}})
-    </option>
-  {{/each}}
-</select>
+
+<div class="container py-4" style="max-width: 600px;">
+    <h2 class="fw-bold mb-4">Cadastro de Usuário</h2>
+
+    {{#if success}}
+    <div class="alert alert-success">
+        Cadastro realizado com sucesso! Sua senha foi armazenada de forma segura.
+    </div>
+    {{/if}}
+
+    {{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+    {{/if}}
+
+    <form action="/user/register" method="POST">
+        <div class="mb-3">
+            <label for="fullname" class="form-label fw-semibold">Nome completo</label>
+            <input type="text" id="fullname" name="fullname"
+                   class="form-control" placeholder="Ex: Maria Silva"
+                   value="{{fullname}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label fw-semibold">E-mail</label>
+            <input type="email" id="email" name="email"
+                   class="form-control" placeholder="Ex: maria@email.com"
+                   value="{{email}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label fw-semibold">Senha</label>
+            <input type="password" id="password" name="password"
+                   class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="repeatPassword" class="form-label fw-semibold">Repetir senha</label>
+            <input type="password" id="repeatPassword" name="repeatPassword"
+                   class="form-control" required>
+        </div>
+
+        <div class="mb-4">
+            <label for="majorId" class="form-label fw-semibold">Curso</label>
+            <select id="majorId" name="majorId" class="form-select" required>
+                <option value="">Selecione um curso</option>
+                {{#each majors}}
+                <option value="{{this.id}}" {{#if (eq this.id ../majorId)}}selected{{/if}}>
+                    {{this.name}} ({{this.code}})
+                </option>
+                {{/each}}
+            </select>
+            {{#unless majors.length}}
+            <small class="text-muted d-block mt-1">
+                Nenhum curso cadastrado. <a href="/major/create">Cadastre um curso primeiro.</a>
+            </small>
+            {{/unless}}
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">Cadastrar</button>
+            <a href="/" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
