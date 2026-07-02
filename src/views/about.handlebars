@@ -1,0 +1,35 @@
+<div class="container mt-5 text-white bg-dark p-5 rounded shadow">
+    <div class="row align-items-center">
+        <div class="col-md-7">
+            <h1 class="display-4 fw-bold text-success mb-3">Vegetable Samurai</h1>
+            <p class="lead">
+                Prepare sua lâmina! ⚔️ O <strong>Vegetable Samurai</strong> é um jogo arcade de ritmo acelerado onde seu objetivo é fatiar o maior número de vegetais que conseguir enquanto eles voam pela tela.
+            </p>
+            
+            <hr class="my-4 border-secondary">
+            
+            <h3 class="h5 text-warning">Recursos do Jogo:</h3>
+            <ul class="list-unstyled ps-2">
+                <li>🍅 <strong>9 Tipos de Vegetais:</strong> Tomates, berinjelas, batatas e muito mais.</li>
+                <li>◭ <strong>Ranking Global:</strong> Seus melhores scores salvos direto no banco de dados.</li>
+            </ul>
+
+            <a href="/" class="btn btn-success btn-lg mt-3 fw-bold shadow-sm">Voltar ao Menu</a>
+        </div>
+
+        <div class="col-md-5 text-center mt-4 mt-md-0">
+            <img public="/img/ufam.png" alt="Logo da UFAM" class="img-fluid rounded border border-secondary shadow-lg logo-flutuante" style="max-height: 350px; object-fit: cover;">
+        </div>
+    </div>
+</div>
+
+<style>
+    @keyframes flutuarSuave {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+    .logo-flutuante {
+        animation: flutuarSuave 4s ease-in-out infinite;
+    }
+</style>

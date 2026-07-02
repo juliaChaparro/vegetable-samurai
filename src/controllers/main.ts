@@ -9,7 +9,9 @@ const index = (req: Request, res: Response) => {
 }
 
 const about = (req: Request, res: Response) => {
-  res.send("Página about");
+  res.render("main/about", {
+    title: "Sobre - Vegetable Samurai"
+  });
 }
 
 const bemvindo = (req: Request, res: Response) => {
