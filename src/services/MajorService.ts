@@ -2,7 +2,7 @@
 // MajorService.ts — Serviço do CRUD de Major
 // Responsável: Membro 2 | Exercício #13
 // =============================================================
-import { PrismaClient } from "../generated/prisma/index.js";
+import { PrismaClient } from "@prisma/client";
 import type { ICreateMajorDTO, IUpdateMajorDTO } from "../interfaces/majorInterface.js";
 
 const prisma = new PrismaClient();
