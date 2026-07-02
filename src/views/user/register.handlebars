@@ -1,0 +1,8 @@
+<select name="majorId" class="form-select" required>
+  <option value="">Selecione um curso</option>
+  {{#each majors}}
+    <option value="{{this.id}}" {{#if (eq this.id ../majorId)}}selected{{/if}}>
+      {{this.name}} ({{this.code}})
+    </option>
+  {{/each}}
+</select>
