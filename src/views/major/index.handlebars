@@ -1,0 +1,102 @@
+{{!-- major/index.handlebars — Exercício #13 e #14 | Membro 2 --}}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">📚 Cursos Cadastrados</h2>
+        <a href="/major/create" class="btn btn-success">+ Novo Curso</a>
+    </div>
+
+    {{#if majors.length}}
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Sigla</th>
+                <th>Descrição</th>
+                <th class="text-center" style="width:160px">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each majors}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td><span class="badge bg-secondary">{{this.code}}</span></td>
+                <td>{{this.description}}</td>
+                <td class="text-center">
+                    <a href="/major/{{this.id}}/edit" class="btn btn-sm btn-warning me-1">
+                        ✏️ Editar
+                    </a>
+                    <button class="btn btn-sm btn-danger btn-deletar"
+                            data-id="{{this.id}}"
+                            data-nome="{{this.name}}">
+                        🗑️ Excluir
+                    </button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <div class="alert alert-info">
+        Nenhum curso cadastrado ainda.
+        <a href="/major/create">Cadastre o primeiro!</a>
+    </div>
+    {{/if}}
+</div>
+
+{{!-- Modal de confirmação de exclusão (#14) --}}
+<div class="modal fade" id="modalDeletar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">⚠️ Confirmar Exclusão</h5>
+                <button type="button" class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja excluir o curso
+                <strong id="nomeMajorModal"></strong>?
+                <br><small class="text-muted">Esta ação não pode ser desfeita.</small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger"
+                        id="btnConfirmarDelete">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Exercício #14 — exclusão via Ajax com modal de confirmação
+    let idParaDeletar = "";
+
+    document.querySelectorAll(".btn-deletar").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            idParaDeletar = btn.dataset.id ?? "";
+            document.getElementById("nomeMajorModal").textContent = btn.dataset.nome ?? "";
+            const modal = new bootstrap.Modal(document.getElementById("modalDeletar"));
+            modal.show();
+        });
+    });
+
+    document.getElementById("btnConfirmarDelete").addEventListener("click", async () => {
+        if (!idParaDeletar) return;
+
+        try {
+            const res = await fetch(`/major/${idParaDeletar}/delete`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                window.location.reload();
+            } else {
+                alert("Erro ao excluir: " + (data.message ?? "Tente novamente."));
+            }
+        } catch {
+            alert("Falha na requisição. Verifique sua conexão.");
+        }
+    });
+</script>
