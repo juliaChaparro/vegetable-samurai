@@ -19,6 +19,6 @@ router.get("/major/create", MajorController.create);
 router.post("/major", MajorController.store);
 router.get("/major/:id/edit", MajorController.edit);
 router.post("/major/:id/update", MajorController.update);
-router.post("/major/:id/delete", MajorController.destroy);
+router.post("/major/remove/:id", MajorController.destroy);
 
 export default router;
