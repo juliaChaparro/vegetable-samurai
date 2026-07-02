@@ -1,0 +1,31 @@
+{{!-- major/edit.handlebars — Exercício #13 | Membro 2 --}}
+<div class="container py-4" style="max-width: 600px;">
+    <h2 class="fw-bold mb-4">✏️ Editar Curso</h2>
+
+    <form action="/major/{{major.id}}/update" method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label fw-semibold">Nome do Curso</label>
+            <input type="text" id="name" name="name"
+                   class="form-control" value="{{major.name}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="code" class="form-label fw-semibold">Sigla</label>
+            <input type="text" id="code" name="code"
+                   class="form-control" maxlength="4"
+                   value="{{major.code}}" required>
+        </div>
+
+        <div class="mb-4">
+            <label for="description" class="form-label fw-semibold">Descrição</label>
+            <textarea id="description" name="description"
+                      class="form-control" rows="4"
+                      required>{{major.description}}</textarea>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-warning">Atualizar</button>
+            <a href="/major" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

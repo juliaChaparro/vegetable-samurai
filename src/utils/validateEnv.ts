@@ -1,15 +1,22 @@
+// =============================================================
+// validateEnv.ts — Validação de variáveis de ambiente
+// Responsável: Membro 2 | Exercício #3
+// =============================================================
 import { cleanEnv, port, str } from "envalid";
-import dotenv from "dotenv"
 
-// @ts-ignore
-dotenv.config({ quiet: true })
-
-function validateEnv() {
+const validateEnv = () => {
     return cleanEnv(process.env, {
-        PORT: port({ default: 4567 }),
-        NODE_ENV: str({ choices: ["development", "production"], default: "development" }),
-        LOGS_PATH: str()
-    })
-}
+        PORT: port({
+            default: 3000,
+            docs: "Porta em que o servidor vai rodar",
+        }),
+        DATABASE_URL: str({
+            docs: "URL de conexão com o banco de dados MySQL (Prisma)",
+        }),
+        LOGS_PATH: str({
+            docs: "Caminho absoluto ou relativo do arquivo de log",
+        }),
+    });
+};
 
 export default validateEnv;

@@ -33,6 +33,9 @@ app.use("/js", [
   express.static(`${process.cwd()}/node_modules/bootstrap/dist/js`),
 ]);
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(router);
 
 app.listen(PORT, () => {

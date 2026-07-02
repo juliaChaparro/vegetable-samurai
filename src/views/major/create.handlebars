@@ -1,0 +1,36 @@
+{{!-- major/create.handlebars — Exercício #13 | Membro 2 --}}
+<div class="container py-4" style="max-width: 600px;">
+    <h2 class="fw-bold mb-4">➕ Novo Curso</h2>
+
+    {{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+    {{/if}}
+
+    <form action="/major" method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label fw-semibold">Nome do Curso</label>
+            <input type="text" id="name" name="name"
+                   class="form-control" placeholder="Ex: Ciência da Computação"
+                   value="{{name}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="code" class="form-label fw-semibold">Sigla</label>
+            <input type="text" id="code" name="code"
+                   class="form-control" placeholder="Ex: BCC"
+                   maxlength="4" value="{{code}}" required>
+        </div>
+
+        <div class="mb-4">
+            <label for="description" class="form-label fw-semibold">Descrição</label>
+            <textarea id="description" name="description"
+                      class="form-control" rows="4"
+                      placeholder="Descreva brevemente o curso..." required>{{description}}</textarea>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <a href="/major" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
