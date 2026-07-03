@@ -3,10 +3,16 @@ import mainController from "../controllers/main.js";
 import MajorController from "../controllers/MajorController.js";
 import UserController from "../controllers/UserController.js";
 import AuthController from "../controllers/AuthController.js";
+import GameSessionController from "../controllers/GameSessionController.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.get("/", mainController.index);
+// ── Jogo — apenas usuários logados (#16) ──────────────────────
+router.get("/", authMiddleware, GameSessionController.index);
+
+// ── Salvar score via Ajax (#16) ────────────────────────────────
+router.post("/score", authMiddleware, GameSessionController.salvarScore);
 router.get("/about", mainController.about);
 router.get("/bem-vindo/:nome/:sobrenome", mainController.bemvindo);
 router.get("/hb1", mainController.hb1);

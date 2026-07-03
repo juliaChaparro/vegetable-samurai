@@ -31,6 +31,7 @@ app.use(morgan("short"));
 app.use(logger("complete"));
 
 app.use("/img", express.static(`${process.cwd()}/public/img`));
+app.use("/game", express.static(`${process.cwd()}/game`));
 app.use("/css", [
   express.static(`${process.cwd()}/public/css`),
   express.static(`${process.cwd()}/node_modules/bootstrap/dist/css`),

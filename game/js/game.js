@@ -38,8 +38,8 @@ export class MotorDoJogo {
   mudarTela(novaTela) {
     if (this.telaAtual === novaTela) return;
 
-    const cortina = document.getElementById('cortina-transicao');
-    if (cortina) cortina.classList.add('ativa');
+    const cortina = document.getElementById("cortina-transicao");
+    if (cortina) cortina.classList.add("ativa");
 
     this.jogoRodando = false;
     this.pararLoop();
@@ -75,7 +75,7 @@ export class MotorDoJogo {
         Juiz.tocarBGM();
       }
 
-      if (cortina) cortina.classList.remove('ativa');
+      if (cortina) cortina.classList.remove("ativa");
 
       // Espera a tela clarear (500ms) para começar a nascer as frutas
       setTimeout(() => {
@@ -84,7 +84,6 @@ export class MotorDoJogo {
           this.iniciarLoop();
         }
       }, 500);
-
     }, 500);
   }
 
@@ -101,6 +100,11 @@ export class MotorDoJogo {
     }
 
     setTimeout(() => {
+      // Envia a pontuação para a página Express via postMessage
+      window.parent.postMessage(
+        { tipo: "gameOver", pontuacao: pontuacaoFinal },
+        window.location.origin,
+      );
       this.mudarTela("gameover");
     }, 1000);
   }
@@ -194,7 +198,8 @@ export class MotorDoJogo {
             // Executa a transição de tela
             if (btn.acao === "jogar") this.mudarTela("jogando");
             else if (btn.acao === "menu") this.mudarTela("menu");
-            else if (btn.acao === "opcoes") console.log("Opções: Em desenvolvimento!");
+            else if (btn.acao === "opcoes")
+              console.log("Opções: Em desenvolvimento!");
 
             // Reseta o botão meio segundo depois para futuras interações
             setTimeout(() => {
