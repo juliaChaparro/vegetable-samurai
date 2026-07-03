@@ -1,4 +1,5 @@
 import express from "express";
+import session from "express-session";
 import { engine } from "express-handlebars";
 import helpers from "./views/helpers/helpers.js";
 
@@ -10,6 +11,12 @@ import router from "./router/router.js";
 const env = validateEnv();
 const PORT = env.PORT;
 const app = express();
+
+declare module "express-session" {
+  interface SessionData {
+    uid: string;
+  }
+}
 
 app.engine(
   "handlebars",
@@ -35,6 +42,19 @@ app.use("/js", [
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "super-secret-key",
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
+
+app.use((req, res, next) => {
+  res.locals.uid = req.session.uid;
+  next();
+});
 
 app.use(router);
 

@@ -2,6 +2,7 @@ import { Router } from "express";
 import mainController from "../controllers/main.js";
 import MajorController from "../controllers/MajorController.js";
 import UserController from "../controllers/UserController.js";
+import AuthController from "../controllers/AuthController.js";
 
 const router = Router();
 
@@ -25,5 +26,10 @@ router.post("/major/remove/:id", MajorController.destroy);
 // ── Cadastro de usuários ───────────────────────
 router.get("/user/register", UserController.create);
 router.post("/user/register", UserController.store);
+
+// ── Autenticação ─────────────────────────
+router.get("/login", AuthController.loginForm);
+router.post("/login", AuthController.login);
+router.get("/logout", AuthController.logout);
 
 export default router;
