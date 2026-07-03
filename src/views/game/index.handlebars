@@ -1,0 +1,41 @@
+{{!-- game/index.handlebars — Exercício #16 | Membro 2
+     Embute o jogo da Parte 1 via iframe e faz Ajax no Game Over --}}
+
+<style>
+    body, html { margin: 0; padding: 0; overflow: hidden; }
+    #game-frame {
+        width: 100vw;
+        height: calc(100vh - 56px); /* desconta a navbar */
+        border: none;
+        display: block;
+    }
+</style>
+
+<iframe id="game-frame" src="/game/index.html" title="Vegetable Samurai"></iframe>
+
+<script>
+    // Escuta a mensagem de Game Over que o jogo envia via postMessage
+    window.addEventListener("message", async (event) => {
+        // Aceita apenas mensagens da própria origem
+        if (event.origin !== window.location.origin) return;
+
+        const data = event.data;
+        if (!data || data.tipo !== "gameOver") return;
+
+        const score = Number(data.pontuacao ?? 0);
+
+        try {
+            const res = await fetch("/score", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ score }),
+            });
+            const json = await res.json();
+            if (!json.success) {
+                console.warn("[Score] Falha ao salvar:", json.message);
+            }
+        } catch (err) {
+            console.error("[Score] Erro na requisição:", err);
+        }
+    });
+</script>
