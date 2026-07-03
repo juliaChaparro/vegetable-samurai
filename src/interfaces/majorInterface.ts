@@ -20,3 +20,19 @@ export interface IUpdateMajorDTO {
   code?: string;
   description?: string;
 }
+
+export interface ICreateUserDTO {
+  fullname: string;
+  email: string;
+  password: string;
+  majorId: string;
+}
+
+export interface IRegisterFormData {
+  fullname: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+  majorId: string;
+}
+
