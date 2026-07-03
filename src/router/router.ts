@@ -13,6 +13,9 @@ router.get("/", authMiddleware, GameSessionController.index);
 
 // ── Salvar score via Ajax (#16) ────────────────────────────────
 router.post("/score", authMiddleware, GameSessionController.salvarScore);
+
+// ── Ranking (#17) ──────────────────────────────────────────────
+router.get("/ranking", GameSessionController.ranking);
 router.get("/about", mainController.about);
 router.get("/bem-vindo/:nome/:sobrenome", mainController.bemvindo);
 router.get("/hb1", mainController.hb1);

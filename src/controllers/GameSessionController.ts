@@ -36,4 +36,15 @@ const salvarScore = async (req: Request, res: Response) => {
     }
 };
 
-export default { index, salvarScore };
+// ── Rota GET /ranking — exibe o Top 10 (#17) ───────────────────
+const ranking = async (req: Request, res: Response) => {
+    try {
+        const topScores = await GameSessionService.topScores();
+        res.render("game/ranking", { topScores });
+    } catch (error) {
+        console.error("[GameSession] Erro ao buscar ranking:", error);
+        res.status(500).send("Erro interno ao carregar o ranking.");
+    }
+};
+
+export default { index, salvarScore, ranking };

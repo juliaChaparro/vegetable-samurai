@@ -1,0 +1,42 @@
+{{!-- game/ranking.handlebars — Exercício #17 | Membro 3 --}}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">🏆 Ranking do Samurai</h2>
+        <a href="/" class="btn btn-primary">Voltar ao Jogo</a>
+    </div>
+
+    {{#if topScores.length}}
+    <style>
+        .table-ranking { counter-reset: rowNumber; }
+        .table-ranking tbody tr { counter-increment: rowNumber; }
+        .table-ranking tbody tr td.col-pos::before { content: counter(rowNumber) "º"; font-weight: bold; }
+    </style>
+    
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle table-ranking">
+            <thead class="table-dark">
+                <tr>
+                    <th style="width: 80px;" class="text-center">Posição</th>
+                    <th>Jogador</th>
+                    <th class="text-end" style="width: 150px;">Pontuação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each topScores}}
+                <tr>
+                    <td class="text-center col-pos"></td>
+                    <td>{{this.user.fullname}}</td>
+                    <td class="text-end fw-bold text-success">{{this.score}} pts</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{else}}
+    <div class="alert alert-info">
+        Nenhuma pontuação registrada ainda. Seja o primeiro a jogar!
+        <br><br>
+        <a href="/" class="btn btn-primary">Jogar Agora</a>
+    </div>
+    {{/if}}
+</div>
