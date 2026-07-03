@@ -1,0 +1,74 @@
+{{!-- about.handlebars — Exercício #2 | Membro 2 --}}
+<section class="about-hero">
+    <div class="container py-5">
+        <div class="row align-items-center g-5">
+
+            <div class="col-md-6 text-center">
+                <img src="/img/vegetable-samurai-banner.png"
+                     alt="Vegetable Samurai"
+                     class="img-fluid rounded shadow-lg about-img logo-flutuante">
+            </div>
+
+            <div class="col-md-6">
+                <h1 class="display-5 fw-bold mb-3">🥦 Vegetable Samurai</h1>
+                <p class="lead text-muted mb-4">
+                    Um jogo de ação desenvolvido com JavaScript puro, inspirado em
+                    <strong>Fruit Ninja</strong>. Controle uma lâmina com o mouse e corte
+                    vegetais antes que eles caiam — sem deixar a bomba te pegar!
+                </p>
+
+                <hr class="my-4">
+
+                <h5 class="fw-bold mb-3">🎮 Como jogar</h5>
+                <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item">
+                        🖱️ <strong>Segure o botão esquerdo</strong> e arraste para criar a lâmina
+                    </li>
+                    <li class="list-group-item">
+                        🥕 <strong>Corte os vegetais</strong> que sobem pela tela para ganhar pontos
+                    </li>
+                    <li class="list-group-item">
+                        ❌ <strong>Não deixe cair</strong> — cada vegetal perdido custa uma vida
+                    </li>
+                    <li class="list-group-item">
+                        💣 <strong>Evite a bomba</strong> — cortá-la encerra o jogo imediatamente
+                    </li>
+                    <li class="list-group-item">
+                        ⚡ <strong>Combos</strong> — corte 3+ vegetais seguidos para pontos bônus
+                    </li>
+                </ul>
+
+                <h5 class="fw-bold mb-3">🏆 Pontuações</h5>
+                <table class="table table-bordered table-sm">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Vegetal</th>
+                            <th>Pontos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>🎃 Abóbora (especial)</td><td>50 pts</td></tr>
+                        <tr><td>🍉 Melancia</td><td>20 pts</td></tr>
+                        <tr><td>Demais vegetais</td><td>10 pts cada</td></tr>
+                    </tbody>
+                </table>
+
+                <a href="/" class="btn btn-success btn-lg mt-3">
+                    Jogar agora →
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes flutuarSuave {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+    .logo-flutuante {
+        animation: flutuarSuave 4s ease-in-out infinite;
+    }
+</style>

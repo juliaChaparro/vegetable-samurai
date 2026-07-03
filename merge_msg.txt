@@ -1,0 +1,12 @@
+Integração do Jogo Samurai e Sistema de Sessão
+
+Issues:
+- Resolves #52
+- Resolves #53
+
+Modificações e adições implementadas:
+- Extração limpa dos arquivos lógicos, assets do jogo (game/) e da respectiva view da branch 'carloso'.
+- Injeção e atualização das rotas em `src/index.ts` para servir o conteúdo estático do jogo (/game).
+- Configuração do controlador GameSessionController e do serviço GameSessionService para lidar com a gravação de pontos.
+- Criação e aplicação do authMiddleware para verificar o estado da sessão (bloqueio de acesso para usuários deslogados).
+- Ajuste das rotas principais em `router.ts`: a raiz (/) agora exibe o jogo de forma restrita; também inserido o endpoint (/score) para chamadas Ajax do jogo.

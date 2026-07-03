@@ -9,9 +9,7 @@ const index = (req: Request, res: Response) => {
 }
 
 const about = (req: Request, res: Response) => {
-  res.render("main/about", {
-    title: "Sobre - Vegetable Samurai"
-  });
+  res.render("about/about");
 }
 
 const bemvindo = (req: Request, res: Response) => {

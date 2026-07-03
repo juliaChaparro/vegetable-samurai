@@ -15,6 +15,7 @@ app.engine(
   "handlebars",
   engine({
     helpers,
+    partialsDir: `${process.cwd()}/src/views/partials`,
   }),
 );
 app.set("view engine", "handlebars");

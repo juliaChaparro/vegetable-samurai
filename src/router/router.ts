@@ -1,17 +1,22 @@
 import { Router } from "express";
-import mainController from "../controllers/main.js"
+import mainController from "../controllers/main.js";
+import MajorController from "../controllers/MajorController.js";
+import UserController from "../controllers/UserController.js";
+import AuthController from "../controllers/AuthController.js";
+import GameSessionController from "../controllers/GameSessionController.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.get("/", mainController.index);
+// ── Jogo — apenas usuários logados (#16) ──────────────────────
+router.get("/", authMiddleware, GameSessionController.index);
 
-router.get("/about", (req, res) => {
-    res.render("about", { 
-        title: "Sobre - Vegetable Samurai" 
-    });
-});
+// ── Salvar score via Ajax (#16) ────────────────────────────────
+router.post("/score", authMiddleware, GameSessionController.salvarScore);
 
-// router.get("/about", mainController.about);
+// ── Ranking (#17) ──────────────────────────────────────────────
+router.get("/ranking", GameSessionController.ranking);
+router.get("/about", mainController.about);
 router.get("/bem-vindo/:nome/:sobrenome", mainController.bemvindo);
 router.get("/hb1", mainController.hb1);
 router.get("/hb2", mainController.hb2);
@@ -19,12 +24,21 @@ router.get("/hb3", mainController.hb3);
 router.get("/hb4", mainController.hb4);
 router.get("/lorem/:quantidade", mainController.lorem);
 
-// Definição das rotas CRUD de Majors
-router.post("/majors", majorController.create);
-router.get("/majors", majorController.getAll);
-router.get("/majors/:id", majorController.getById);
-router.put("/majors/:id", majorController.update);
-router.delete("/majors/:id", majorController.delete);
+// ── Major CRUD — Membro 2 (#13 e #14) ─────────────────────────
+router.get("/major", MajorController.index);
+router.get("/major/create", MajorController.create);
+router.post("/major", MajorController.store);
+router.get("/major/:id/edit", MajorController.edit);
+router.post("/major/:id/update", MajorController.update);
+router.post("/major/remove/:id", MajorController.destroy);
 
+// ── Cadastro de usuários ───────────────────────
+router.get("/user/register", UserController.create);
+router.post("/user/register", UserController.store);
+
+// ── Autenticação ─────────────────────────
+router.get("/login", AuthController.loginForm);
+router.post("/login", AuthController.login);
+router.get("/logout", AuthController.logout);
 
 export default router;
