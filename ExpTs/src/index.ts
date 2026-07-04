@@ -7,6 +7,7 @@ import validateEnv from "./utils/validateEnv.js";
 import logger from "./middlewares/logger.js";
 import morgan from "morgan";
 import router from "./router/router.js";
+import authMiddleware from "./middlewares/authMiddleware.js";
 
 const env = validateEnv();
 const PORT = env.PORT;
@@ -30,17 +31,6 @@ app.set("views", `${process.cwd()}/src/views`);
 app.use(morgan("short"));
 app.use(logger("complete"));
 
-app.use("/img", express.static(`${process.cwd()}/public/img`));
-app.use("/game", express.static(`${process.cwd()}/game`));
-app.use("/css", [
-  express.static(`${process.cwd()}/public/css`),
-  express.static(`${process.cwd()}/node_modules/bootstrap/dist/css`),
-]);
-app.use("/js", [
-  express.static(`${process.cwd()}/public/js`),
-  express.static(`${process.cwd()}/node_modules/bootstrap/dist/js`),
-]);
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -56,6 +46,19 @@ app.use((req, res, next) => {
   res.locals.uid = req.session.uid;
   next();
 });
+
+app.use("/img", express.static(`${process.cwd()}/public/img`));
+
+app.use("/game", authMiddleware, express.static(`${process.cwd()}/game`));
+
+app.use("/css", [
+  express.static(`${process.cwd()}/public/css`),
+  express.static(`${process.cwd()}/node_modules/bootstrap/dist/css`),
+]);
+app.use("/js", [
+  express.static(`${process.cwd()}/public/js`),
+  express.static(`${process.cwd()}/node_modules/bootstrap/dist/js`),
+]);
 
 app.use(router);
 
