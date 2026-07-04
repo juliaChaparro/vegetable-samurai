@@ -80,7 +80,7 @@ git clone https://github.com/juliaChaparro/vegetable-samurai.git
 **2. Acesse a pasta do projeto**
 
 ```bash
-cd vegetable-samurai
+cd vegetable-samurai/ExpTs
 ```
 
 > Certifique-se de estar na branch `main`.
@@ -96,7 +96,7 @@ npm install
 Copie o arquivo de exemplo e preencha com seus dados:
 
 ```bash
-cp .env.example .env
+cp .env-example .env
 ```
 
 Edite o `.env` com seus dados:

@@ -8,6 +8,7 @@ import logger from "./middlewares/logger.js";
 import morgan from "morgan";
 import router from "./router/router.js";
 import authMiddleware from "./middlewares/authMiddleware.js";
+import "dotenv/config";
 
 const env = validateEnv();
 const PORT = env.PORT;
@@ -49,7 +50,7 @@ app.use((req, res, next) => {
 
 app.use("/img", express.static(`${process.cwd()}/public/img`));
 
-app.use("/game", authMiddleware, express.static(`${process.cwd()}/game`));
+app.use("/game", authMiddleware, express.static(`${process.cwd()}/../game`));
 
 app.use("/css", [
   express.static(`${process.cwd()}/public/css`),
