@@ -1,10 +1,11 @@
 # 🥦 Vegetable Samurai
 
-> Jogo de browser inspirado em Fruit Ninja, desenvolvido com JavaScript puro (ES Modules), HTML5 e CSS3 como trabalho prático da disciplina de Programação Web.
+> Trabalho Prático da disciplina de Programação Web — UFAM.
+> O projeto é composto por duas partes: um jogo de browser desenvolvido com JavaScript puro, e uma aplicação web com Express + TypeScript que permite aos usuários criar conta, fazer login e jogar, além de exibir um ranking com as maiores pontuações.
 
 ---
 
-## 🎮 Descrição do Jogo
+## 🎮 Parte 1 — O Jogo
 
 Vegetable Samurai é um jogo de ação onde o jogador controla uma **lâmina invisível** movida pelo mouse para cortar vegetais que sobem pela tela. O objetivo é acumular a maior pontuação possível sem perder todas as vidas.
 
@@ -19,11 +20,10 @@ Vegetable Samurai é um jogo de ação onde o jogador controla uma **lâmina inv
 
 ### Vegetais e pontuações
 
-| Vegetal                                                                      | Pontos      |
-| ---------------------------------------------------------------------------- | ----------- |
-| Abóbora 🎃 _(especial)_                                                      | 50 pts      |
-| Melancia                                                                     | 20 pts      |
-| Tomate, Cenoura, Cebola, Berinjela, Batata, Brócolis, Pimentão, Repolho Roxo | 10 pts cada |
+| Vegetal                                                             | Pontos      |
+| ------------------------------------------------------------------- | ----------- |
+| Melancia                                                            | 20 pts      |
+| Tomate, Cebola, Berinjela, Batata, Brócolis, Pimentão, Repolho Roxo | 10 pts cada |
 
 ### Obstáculos
 
@@ -46,12 +46,28 @@ O jogo possui um **Diretor de Dificuldade** que ajusta automaticamente o ritmo c
 
 ---
 
+## 🌐 Parte 2 — Aplicação Web
+
+A segunda parte integra o jogo a uma aplicação web completa desenvolvida com **Express + TypeScript**. A aplicação permite que qualquer usuário crie uma conta, faça login e acesse o jogo. Ao terminar uma partida, a pontuação é salva automaticamente no banco de dados e exibida em uma página de ranking.
+
+### Funcionalidades
+
+- Cadastro e login de usuários com senha criptografada
+- Acesso ao jogo restrito a usuários autenticados
+- Salvamento automático de pontuações ao fim de cada partida
+- Página de ranking com os 10 melhores jogadores
+- CRUD de cursos (Majors) com exclusão via modal Ajax
+- Página Sobre descrevendo o jogo
+
+---
+
 ## 🚀 Instruções de Execução
 
 ### Pré-requisitos
 
 - [Node.js](https://nodejs.org/) instalado (qualquer versão LTS)
 - [Git](https://git-scm.com/) instalado
+- Banco de dados MySQL disponível
 
 ### Passo a passo
 
@@ -64,23 +80,60 @@ git clone https://github.com/juliaChaparro/vegetable-samurai.git
 **2. Acesse a pasta do projeto**
 
 ```bash
-cd vegetable-samurai/game
+cd vegetable-samurai
 ```
 
-> O projeto deve ser clonado a partir da branch `main`.
+> Certifique-se de estar na branch `main`.
 
-**3. Inicie o servidor local**
+**3. Instale as dependências**
 
 ```bash
+npm install
+```
+
+**4. Configure as variáveis de ambiente**
+
+Copie o arquivo de exemplo e preencha com seus dados:
+
+```bash
+cp .env.example .env
+```
+
+Edite o `.env` com seus dados:
+
+```env
+PORT=3000
+DATABASE_URL="mysql://usuario:senha@localhost:3306/vegetable_samurai"
+LOGS_PATH="./logs/app.log"
+SESSION_SECRET="sua-chave-secreta"
+```
+
+**5. Rode as migrations do banco**
+
+```bash
+npx prisma migrate deploy
+```
+
+**6. Inicie o servidor**
+
+```bash
+npm start
+```
+
+> A aplicação estará disponível em `http://localhost:3000`.
+
+---
+
+### Rodar apenas o jogo (sem o servidor)
+
+Caso queira testar somente o jogo da Parte 1:
+
+```bash
+cd game
 npx live-server
 ```
 
-> O comando `npx live-server` não requer instalação prévia — o `npx` baixa e executa automaticamente.  
-> O jogo abrirá no navegador em `http://127.0.0.1:8080` (ou porta similar indicada no terminal).
-
-**4. Modo de desenvolvimento (opcional)**
-
-Para ativar ferramentas de debug — botão de teste de corte e atalhos de teclado:
+**Modo debug** — ativa botão de teste e atalhos de teclado:
 
 ```
 http://127.0.0.1:8080/?debug
@@ -100,89 +153,115 @@ http://127.0.0.1:8080/?debug
 
 ```
 vegetable-samurai/
-├── package.json                # Configuração do Node e gerenciamento de pacotes
-├── README.md                   # Documentação oficial do projeto
-└── game/                       # Pasta isolada contendo o jogo final
-    ├── index.html              # Estrutura principal e HUD
-    ├── css/
-    │   └── style.css           # Estilos, animações e variáveis visuais
-    ├── js/
-    │   ├── main.js             # Ponto de entrada — inicializa todos os módulos
-    │   ├── config.js           # Estado global do jogo (pontuação, vidas)
-    │   ├── entidadeBase.js     # Classe base abstrata para todos os objetos do jogo
-    │   ├── vegetal.js          # Classe dos vegetais cortáveis
-    │   ├── bomba.js            # Classe da bomba (obstáculo letal)
-    │   ├── madeira.js          # Classe da madeira (zera combo)
-    │   ├── entidades.js        # Pool de entidades (object pooling)
-    │   ├── spawner.js          # Controlador de spawn (lançamentos)
-    │   ├── diretor.js          # Diretor de dificuldade progressiva
-    │   ├── lamina.js           # Lâmina do mouse (rastro + trigonometria)
-    │   ├── colisao.js          # Detecção de colisão lâmina × entidade
-    │   ├── game.js             # Motor do jogo (game loop, telas, botões)
-    │   ├── score.js            # Juiz (pontuação, HUD, combos, best score)
-    │   ├── particulas.js       # Efeitos visuais (split, splash, explosão)
-    │   └── sfx.js              # Gerenciador de efeitos sonoros
-    └── assets/
-        ├── background/         # Imagens de fundo e botões SVG
-        ├── Vegetais_SVG/       # Sprites dos vegetais (inteiros e metades)
-        ├── sfx/                # Efeitos sonoros (.mp3)
-        ├── Moeda_vida.svg      # Ícone de vida ativa
-        └── Moeda_vida_perdida.svg
+├── .env.example                # Variáveis de ambiente (template versionável)
+├── .gitignore
+├── package.json
+├── prisma/
+│   └── schema.prisma           # Modelos Major, User e GameSession
+├── game/                       # Jogo da Parte 1 (JavaScript puro)
+│   ├── index.html
+│   ├── css/
+│   ├── assets/
+│   └── js/
+│       ├── main.js             # Ponto de entrada do jogo
+│       ├── config.js           # Estado global (pontuação, vidas)
+│       ├── entidadeBase.js     # Classe base abstrata
+│       ├── vegetal.js          # Vegetais cortáveis
+│       ├── bomba.js            # Obstáculo letal
+│       ├── madeira.js          # Obstáculo que zera combo
+│       ├── entidades.js        # Pool de entidades
+│       ├── spawner.js          # Controlador de spawn
+│       ├── diretor.js          # Diretor de dificuldade progressiva
+│       ├── lamina.js           # Lâmina do mouse
+│       ├── colisao.js          # Detecção de colisão
+│       ├── game.js             # Motor do jogo
+│       ├── score.js            # Sistema de pontuação e HUD
+│       ├── particulas.js       # Efeitos visuais
+│       └── sfx.js              # Efeitos sonoros
+└── src/                        # Aplicação Express (Parte 2)
+    ├── controllers/
+    │   ├── main.ts             # Controlador principal (hb1-hb4, lorem, about)
+    │   ├── MajorController.ts  # CRUD de cursos
+    │   ├── UserController.ts   # Cadastro e login
+    │   └── GameSessionController.ts  # Jogo e salvamento de scores
+    ├── services/
+    │   ├── MajorService.ts     # Lógica de negócio dos cursos
+    │   ├── UserService.ts      # Lógica de negócio dos usuários
+    │   └── GameSessionService.ts     # Salvamento e ranking de scores
+    ├── middlewares/
+    │   ├── authMiddleware.ts   # Proteção de rotas autenticadas
+    │   └── logger.ts           # Log de requisições em arquivo
+    ├── router/
+    │   └── router.ts           # Todas as rotas da aplicação
+    ├── types/
+    │   └── MajorTypes.ts       # Interfaces e DTOs
+    ├── utils/
+    │   └── validateEnv.ts      # Validação de variáveis de ambiente
+    └── views/                  # Templates Handlebars
+        ├── layouts/
+        ├── about/
+        ├── game/
+        ├── major/
+        ├── user/
+        └── main/
 ```
 
 ---
 
 ## 👥 Divisão de Responsabilidades
 
-A divisão detalhada de cada issue resolvido por cada membro pode ser consultada diretamente na aba **Issues** do repositório no GitHub:
+A divisão detalhada por issue está na aba **Issues** do repositório:
 
 🔗 [github.com/juliaChaparro/vegetable-samurai/issues](https://github.com/juliaChaparro/vegetable-samurai/issues)
 
-Abaixo um resumo das áreas de atuação de cada integrante:
+### Victor Hugo — Motor do Jogo e Infraestrutura Web
 
-### Victor Hugo — Motor do Jogo e Interface
+**Parte 1:** Motor do jogo (`game.js`), game loop, telas de menu e game over, Diretor de Dificuldade, integração dos módulos.
+**Parte 2:** Setup do projeto Express + TypeScript, arquitetura MVC, layout Handlebars, configuração do SASS, Navbar dinâmica com Bootstrap, CRUD de cursos (rotas e views).
 
-- Estrutura do `MotorDoJogo` (`game.js`): game loop, controle de telas, botões cortáveis
-- Telas de Menu e Game Over com navegação via lâmina
-- Diretor de Dificuldade (`diretor.js`): progressão automática de fases
-- Integração geral dos módulos e arquivo `main.js`
+### Julia Chaparro — Lâmina, Colisão e Autenticação
 
-### Julia Chaparro — Lâmina, Colisão e Design
+**Parte 1:** Sistema de rastro do mouse (`lamina.js`), detecção de colisão por interpolação linear, design e assets visuais dos vegetais e telas.
+**Parte 2:** Validação de variáveis de ambiente (`validateEnv.ts`), middleware de logs, página About, CRUD de Major, integração do jogo na rota `/` com bloqueio para usuários não autenticados e salvamento de scores via Ajax.
 
-- Sistema de rastro do mouse (`lamina.js`): trigonometria, animação e pool de divs
-- Detecção de colisão por interpolação linear (`colisao.js`)
-- Eventos de mouse (`mousedown`, `mousemove`, `mouseup`)
-- Criação dos designs e assets visuais dos vegetais (aplicados tanto no menu principal quanto durante o jogo).
-- Desenvolvimento dos elementos visuais da tela inicial.
-- Produção dos assets gráficos utilizados durante a jogabilidade.
+### Pedro Barreto — Entidades, Física e Banco de Dados
 
-### Pedro Barreto — Entidades e Física
+**Parte 1:** Classe base `EntidadeBase`, classes `Vegetal`, `Bomba` e `Madeira`, pool de entidades, sistema de spawn.
+**Parte 2:** Configuração do Prisma ORM, modelos `Major`, `User` e `GameSession`, migrations, modal de exclusão via Ajax, página de Ranking.
 
-- Classe base abstrata `EntidadeBase` com física parabólica e gravidade
-- Classes `Vegetal`, `Bomba` e `Madeira` com comportamentos específicos
-- Pool de entidades (`entidades.js`) e sistema de spawn (`spawner.js`)
-- Integração das entidades com o game loop
+### Carlos Henrique — Pontuação, Efeitos e Cadastro de Usuários
 
-### Carlos Henrique — Pontuação, Efeitos e Áudio
-
-- Objeto `Juiz` (`score.js`): HUD, pontuação, combos e Best Score com `localStorage`
-- Efeitos visuais (`particulas.js`): Split (metades ao cortar), Splash (partículas de suco) e Explosão (bomba)
-- Gerenciador de SFX (`sfx.js`): carregamento e disparo de efeitos sonoros
-- Integração do sistema de pontuação com o fluxo de colisão e game over
+**Parte 1:** Sistema de pontuação e HUD (`score.js`), efeitos visuais de split e splash (`particulas.js`), gerenciador de SFX (`sfx.js`), sistema de combos e best score.
+**Parte 2:** Página de cadastro de usuários com criptografia de senha, views de teste do Handlebars (hb1–hb4), helper customizado, rota `/lorem`.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **HTML5** — estrutura e canvas DOM
-- **CSS3** — animações, clip-path, variáveis CSS
+**Parte 1:**
+
+- **HTML5** e **CSS3** — estrutura, animações, clip-path, variáveis CSS
 - **JavaScript ES2022** — ES Modules, Classes, CustomEvents, localStorage, Web Audio API
-- **Live Server** — servidor de desenvolvimento local
+
+**Parte 2:**
+
+- **Node.js** e **Express 5** — servidor web
+- **TypeScript** — tipagem estática
+- **Prisma ORM** — acesso ao banco de dados
+- **MySQL** — banco de dados relacional
+- **Handlebars** — engine de templates
+- **Bootstrap 5** — estilização e componentes UI
+- **SASS** — pré-processador CSS
+- **express-session** — gerenciamento de sessões
+- **envalid** — validação de variáveis de ambiente
+- **bcrypt** — criptografia de senhas
 
 ---
 
 ## 📝 Observações
 
-- O jogo utiliza **ES Modules** (`type="module"`), portanto **não funciona abrindo o `index.html` diretamente** no navegador — é necessário um servidor local (como o `live-server`).
-- Os arquivos de áudio (`corte.mp3`, `bomba.mp3`, `combo.mp3`) devem estar em `assets/sfx/`. Sem eles o jogo funciona normalmente, apenas sem som.
-- Testado nos navegadores Google Chrome e Microsoft Edge (versões modernas).
+- O arquivo `.env` **não deve ser versionado** — use o `.env.example` como base.
+- Os diretórios `node_modules` e `build` também não são versionados.
+- O jogo usa **ES Modules** (`type="module"`), portanto não abre diretamente no navegador sem um servidor local.
+- Efeitos sonoros (`corte.mp3`, `bomba.mp3`, `combo.mp3`, `trilha.mp3`) ficam em `game/assets/sfx/`. O jogo funciona sem eles, apenas sem som.
+- Testado nos navegadores Google Chrome e Microsoft Edge.
